@@ -10,8 +10,10 @@ import '../../../auth/presentation/bloc/auth_event.dart';
 import '../../../auth/presentation/bloc/auth_state.dart';
 import '../../../auth/presentation/pages/profile_page.dart';
 import '../../../ai_assistant/presentation/pages/chat_page.dart';
-// Importamos el BLoC del chat
 import '../../../ai_assistant/presentation/bloc/chat_bloc.dart';
+
+// --- IMPORTAMOS LA PÁGINA DE SOLICITUDES ---
+import '../../../adoption_management/presentation/pages/my_adoption_requests_page.dart';
 
 import '../bloc/pet_bloc.dart';
 import '../bloc/pet_event.dart';
@@ -47,7 +49,6 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
   }
 
   Future<void> _getUserLocation() async {
-    // ... (Tu lógica de GPS se mantiene igual) ...
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) return;
     LocationPermission permission = await Geolocator.checkPermission();
@@ -83,20 +84,22 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Obtenemos el usuario para sacar su ID y Nombre
     final authState = context.watch<AuthBloc>().state;
     String userName = 'Amante de los animales';
+    String userId = '';
+
     if (authState is AuthAuthenticated) {
       userName = authState.user.displayName ?? 'Usuario';
+      userId = authState.user.id;
     }
 
-    // CAMBIO IMPORTANTE: Usamos MultiBlocProvider
     return MultiBlocProvider(
       providers: [
-        // 1. Proveedor de Mascotas
         BlocProvider(
           create: (_) => getIt<PetBloc>()..add(const LoadPets()),
         ),
-        // 2. Proveedor de Chat (AQUÍ LO CREAMOS PARA QUE PERSISTA)
+        // Proveedor de Chat persistente
         BlocProvider(
           create: (_) => getIt<ChatBloc>(),
         ),
@@ -104,25 +107,28 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
       child: Scaffold(
         backgroundColor: const Color(0xFFFFF8F0),
         body: SafeArea(
-          // USAMOS INDEXEDSTACK PARA MANTENER EL ESTADO VIVO
+          // USAMOS INDEXEDSTACK PARA 5 PANTALLAS
           child: IndexedStack(
-            index: _currentIndex, // Le decimos cuál mostrar
+            index: _currentIndex,
             children: [
-              // Índice 0: Home
+              // 0. Inicio
               _buildHomeBody(context, userName),
 
-              // Índice 1: Mapa (¡Ahora se mantendrá vivo!)
+              // 1. Mapa
               const MapPage(),
 
-              // Índice 2: Chat (Ya no se borrará tampoco)
+              // 2. Chat IA
               const ChatPage(),
 
-              // Índice 3: Perfil
+              // 3. Solicitudes (AQUÍ ESTÁ EL CAMBIO)
+              // Pasamos el userId para cargar sus solicitudes
+              MyAdoptionRequestsPage(userId: userId),
+
+              // 4. Perfil
               const ProfilePage(),
             ],
           ),
         ),
-        
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) => setState(() => _currentIndex = index),
@@ -136,6 +142,9 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
                 icon: Icon(Icons.map_outlined), label: 'Mapa'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.chat_bubble_outline), label: 'Chat IA'),
+            // NUEVO ITEM SEGÚN EL CONCEPTO (Corazón)
+            BottomNavigationBarItem(
+                icon: Icon(Icons.favorite_border), label: 'Solicitudes'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline), label: 'Perfil'),
           ],
@@ -144,10 +153,8 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
     );
   }
 
-  // ... (El método _buildHomeBody y la clase _FilterChip se quedan IGUAL que antes) ...
+  // Cuerpo del Home (Sin cambios, solo copia y pega para mantenerlo)
   Widget _buildHomeBody(BuildContext context, String userName) {
-    // Copia aquí tu _buildHomeBody tal cual lo tenías en la versión anterior
-    // Solo asegúrate de que use el 'homeContext' del Builder
     return Builder(builder: (homeContext) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,8 +200,9 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none),
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
                 contentPadding: const EdgeInsets.symmetric(vertical: 0),
               ),
             ),
@@ -256,11 +264,14 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
                           userLocation: _userPosition,
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => PetDetailPage(
-                                        pet: pet,
-                                        userLocation: _userPosition)));
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => PetDetailPage(
+                                  pet: pet,
+                                  userLocation: _userPosition,
+                                ),
+                              ),
+                            );
                           },
                         );
                       },
@@ -281,8 +292,10 @@ class _FilterChip extends StatelessWidget {
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
+
   const _FilterChip(
       {required this.label, required this.isSelected, required this.onTap});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -304,10 +317,14 @@ class _FilterChip extends StatelessWidget {
               : null,
         ),
         child: Center(
-            child: Text(label,
-                style: TextStyle(
-                    color: isSelected ? Colors.white : Colors.grey[700],
-                    fontWeight: FontWeight.bold))),
+          child: Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey[700],
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
     );
   }

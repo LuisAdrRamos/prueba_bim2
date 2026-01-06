@@ -11,6 +11,7 @@ import '../bloc/pet_bloc.dart';
 import '../bloc/pet_event.dart';
 import '../bloc/pet_state.dart';
 import 'create_pet_page.dart';
+import '../../../adoption_management/presentation/pages/incoming_requests_page.dart'; // Importar
 
 class ShelterHomePage extends StatefulWidget {
   final String userId;
@@ -82,7 +83,7 @@ class _ShelterHomePageState extends State<ShelterHomePage> {
           child: _currentIndex == 0
               ? _buildDashboard(context, shelterName)
               : _currentIndex == 1
-                  ? const Center(child: Text('Solicitudes (Fase 5)'))
+                  ? IncomingRequestsPage(shelterId: widget.userId)
                   : const ProfilePage(),
         ),
         bottomNavigationBar: BottomNavigationBar(
