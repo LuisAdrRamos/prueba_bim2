@@ -1,0 +1,5083 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.env.example
+.gitattributes
+.gitignore
+.metadata
+analysis_options.yaml
+android/.gitignore
+android/app/build.gradle
+android/app/src/debug/AndroidManifest.xml
+android/app/src/main/AndroidManifest.xml
+android/app/src/main/kotlin/com/example/prueba_bim2/MainActivity.kt
+android/app/src/main/res/drawable-v21/launch_background.xml
+android/app/src/main/res/drawable/launch_background.xml
+android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+android/app/src/main/res/values-night/styles.xml
+android/app/src/main/res/values/styles.xml
+android/app/src/profile/AndroidManifest.xml
+android/build.gradle
+android/gradle.properties
+android/gradle/wrapper/gradle-wrapper.properties
+android/settings.gradle
+lib/core/constants/app_constants.dart
+lib/core/error/failures.dart
+lib/core/network/network_info.dart
+lib/core/theme/app_theme.dart
+lib/core/usecase/usecase.dart
+lib/features/auth/data/datasources/auth_remote_data_source.dart
+lib/features/auth/data/models/user_model.dart
+lib/features/auth/data/repositories/auth_repository_impl.dart
+lib/features/auth/domain/entities/user_entity.dart
+lib/features/auth/domain/repositories/auth_repository.dart
+lib/features/auth/domain/usecases/get_current_user.dart
+lib/features/auth/domain/usecases/reset_password.dart
+lib/features/auth/domain/usecases/sign_in.dart
+lib/features/auth/domain/usecases/sign_out.dart
+lib/features/auth/domain/usecases/sign_up.dart
+lib/features/auth/presentation/bloc/auth_bloc.dart
+lib/features/auth/presentation/bloc/auth_event.dart
+lib/features/auth/presentation/bloc/auth_state.dart
+lib/features/auth/presentation/pages/email_verification_sent_page.dart
+lib/features/auth/presentation/pages/login_page.dart
+lib/features/auth/presentation/pages/register_page.dart
+lib/features/auth/presentation/pages/reset_password_page.dart
+lib/features/auth/presentation/pages/welcome_page.dart
+lib/features/auth/presentation/widgets/custom_text_field.dart
+lib/features/auth/presentation/widgets/loading_overlay.dart
+lib/injection_container.config.dart
+lib/injection_container.dart
+lib/main.dart
+pubspec.lock
+pubspec.yaml
+README.md
+vercel/.gitignore
+vercel/api/config.js
+vercel/package.json
+vercel/public/reset-password.html
+vercel/public/verify-email.html
+vercel/vercel.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".env.example">
+
+</file>
+
+<file path=".gitattributes">
+# Auto detect text files and perform LF normalization
+* text=auto
+</file>
+
+<file path=".gitignore">
+.env
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+</file>
+
+<file path=".metadata">
+# This file tracks properties of this Flutter project.
+# Used by Flutter tool to assess capabilities and perform upgrades etc.
+#
+# This file should be version controlled and should not be manually edited.
+
+version:
+  revision: "d8a9f9a52e5af486f80d932e838ee93861ffd863"
+  channel: "stable"
+
+project_type: app
+
+# Tracks metadata for the flutter migrate command
+migration:
+  platforms:
+    - platform: root
+      create_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+      base_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+    - platform: android
+      create_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+      base_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+    - platform: ios
+      create_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+      base_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+    - platform: linux
+      create_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+      base_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+    - platform: macos
+      create_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+      base_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+    - platform: web
+      create_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+      base_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+    - platform: windows
+      create_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+      base_revision: d8a9f9a52e5af486f80d932e838ee93861ffd863
+
+  # User provided section
+
+  # List of Local paths (relative to this file) that should be
+  # ignored by the migrate tool.
+  #
+  # Files that are not part of the templates will be ignored by default.
+  unmanaged_files:
+    - 'lib/main.dart'
+    - 'ios/Runner.xcodeproj/project.pbxproj'
+</file>
+
+<file path="analysis_options.yaml">
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at https://dart.dev/lints.
+  #
+  # Instead of disabling a lint rule for the entire project in the
+  # section below, it can also be suppressed for a single line of code
+  # or a specific dart file by using the `// ignore: name_of_lint` and
+  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
+  # producing the lint.
+  rules:
+    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
+    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
+</file>
+
+<file path="android/.gitignore">
+gradle-wrapper.jar
+/.gradle
+/captures/
+/gradlew
+/gradlew.bat
+/local.properties
+GeneratedPluginRegistrant.java
+
+# Remember to never publicly share your keystore.
+# See https://flutter.dev/to/reference-keystore
+key.properties
+**/*.keystore
+**/*.jks
+</file>
+
+<file path="android/app/build.gradle">
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.prueba_bim2"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.example.prueba_bim2"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+</file>
+
+<file path="android/app/src/debug/AndroidManifest.xml">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The INTERNET permission is required for development. Specifically,
+         the Flutter tool needs it to communicate with the running application
+         to allow setting breakpoints, to provide hot reload, etc.
+    -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>
+</file>
+
+<file path="android/app/src/main/AndroidManifest.xml">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <application
+        android:label="prueba_bim2"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                the Android process has started. This theme is visible to the user
+                while the Flutter UI initializes. After that, this theme continues
+                to determine the Window background behind the Flutter UI. -->
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+            />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+            <!-- Deep linking configuration -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="loginpro"/>
+            </intent-filter>
+
+                        <!-- Supabase callback -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"
+                        android:host="loginvercelflutter.vercel.app"/>
+            </intent-filter>
+
+        </activity>
+        <!-- Don't delete the meta-data below.
+            This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+    <!-- Required to query activities that can process text, see:
+        https://developer.android.com/training/package-visibility and
+        https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+
+        In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT" />
+            <data android:mimeType="text/plain" />
+        </intent>
+    </queries>
+</manifest>
+</file>
+
+<file path="android/app/src/main/kotlin/com/example/prueba_bim2/MainActivity.kt">
+package com.example.prueba_bim2
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity()
+</file>
+
+<file path="android/app/src/main/res/drawable-v21/launch_background.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Modify this file to customize your launch splash screen -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="?android:colorBackground" />
+
+    <!-- You can insert your own image assets here -->
+    <!-- <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/launch_image" />
+    </item> -->
+</layer-list>
+</file>
+
+<file path="android/app/src/main/res/drawable/launch_background.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Modify this file to customize your launch splash screen -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:color/white" />
+
+    <!-- You can insert your own image assets here -->
+    <!-- <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/launch_image" />
+    </item> -->
+</layer-list>
+</file>
+
+<file path="android/app/src/main/res/values-night/styles.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is on -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <!-- Show a splash screen on the activity. Automatically removed when
+             the Flutter engine draws its first frame -->
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+    <!-- Theme applied to the Android Window as soon as the process has started.
+         This theme determines the color of the Android Window while your
+         Flutter UI initializes, as well as behind your Flutter UI while its
+         running.
+
+         This Theme is only used starting with V2 of Flutter's Android embedding. -->
+    <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+</resources>
+</file>
+
+<file path="android/app/src/main/res/values/styles.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is off -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <!-- Show a splash screen on the activity. Automatically removed when
+             the Flutter engine draws its first frame -->
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+    <!-- Theme applied to the Android Window as soon as the process has started.
+         This theme determines the color of the Android Window while your
+         Flutter UI initializes, as well as behind your Flutter UI while its
+         running.
+
+         This Theme is only used starting with V2 of Flutter's Android embedding. -->
+    <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+</resources>
+</file>
+
+<file path="android/app/src/profile/AndroidManifest.xml">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The INTERNET permission is required for development. Specifically,
+         the Flutter tool needs it to communicate with the running application
+         to allow setting breakpoints, to provide hot reload, etc.
+    -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>
+</file>
+
+<file path="android/build.gradle">
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+</file>
+
+<file path="android/gradle.properties">
+org.gradle.jvmargs=-Xmx4G -XX:MaxMetaspaceSize=2G -XX:+HeapDumpOnOutOfMemoryError
+android.useAndroidX=true
+android.enableJetifier=true
+</file>
+
+<file path="lib/core/constants/app_constants.dart">
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+class AppConstants {
+  // Supabase Configuration (loaded from .env)
+  static String get supabaseUrl => dotenv.env['SUPABASE_URL'] ?? '';
+  static String get supabaseAnonKey => dotenv.env['SUPABASE_ANON_KEY'] ?? '';
+
+  // Deep Link Configuration
+  static const String appScheme = 'loginpro';
+
+  // Vercel URLs (loaded from .env)
+  static String get vercelBaseUrl => dotenv.env['VERCEL_BASE_URL'] ?? '';
+  static const String emailVerificationPath = '/verify-email';
+  static const String resetPasswordPath = '/reset-password';
+
+  // Error Messages
+  static const String networkError = 'Sin conexión a internet';
+  static const String serverError = 'Error del servidor';
+  static const String authError = 'Error de autenticación';
+  static const String unknownError = 'Error desconocido';
+}
+</file>
+
+<file path="lib/core/error/failures.dart">
+import 'package:equatable/equatable.dart';
+
+abstract class Failure extends Equatable {
+  final String message;
+
+  const Failure(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class ServerFailure extends Failure {
+  const ServerFailure(super.message);
+}
+
+class AuthFailure extends Failure {
+  const AuthFailure(super.message);
+}
+
+class NetworkFailure extends Failure {
+  const NetworkFailure(super.message);
+}
+
+class CacheFailure extends Failure {
+  const CacheFailure(super.message);
+}
+</file>
+
+<file path="lib/core/network/network_info.dart">
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:injectable/injectable.dart';
+
+abstract class NetworkInfo {
+  Future<bool> get isConnected;
+}
+
+@LazySingleton(as: NetworkInfo)
+class NetworkInfoImpl implements NetworkInfo {
+  final Connectivity connectivity;
+
+  NetworkInfoImpl(this.connectivity);
+
+  @override
+  Future<bool> get isConnected async {
+    final result = await connectivity.checkConnectivity();
+    return result.first != ConnectivityResult.none;
+  }
+}
+</file>
+
+<file path="lib/core/theme/app_theme.dart">
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class AppTheme {
+  static const Color primaryColor = Color(0xFF6C5CE7);
+  static const Color secondaryColor = Color(0xFFA29BFE);
+  static const Color backgroundColor = Color(0xFFF5F6FA);
+  static const Color surfaceColor = Colors.white;
+  static const Color errorColor = Color(0xFFFF6B6B);
+  static const Color successColor = Color(0xFF00D2A1);
+  static const Color textPrimaryColor = Color(0xFF2D3436);
+  static const Color textSecondaryColor = Color(0xFF636E72);
+
+  static ThemeData get lightTheme {
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.light(
+        primary: primaryColor,
+        secondary: secondaryColor,
+        surface: surfaceColor,
+        error: errorColor,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: textPrimaryColor,
+        onError: Colors.white,
+      ),
+      scaffoldBackgroundColor: backgroundColor,
+      textTheme: GoogleFonts.interTextTheme().copyWith(
+        displayLarge: GoogleFonts.inter(
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
+          color: textPrimaryColor,
+        ),
+        displayMedium: GoogleFonts.inter(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+          color: textPrimaryColor,
+        ),
+        bodyLarge: GoogleFonts.inter(
+          fontSize: 16,
+          color: textPrimaryColor,
+        ),
+        bodyMedium: GoogleFonts.inter(
+          fontSize: 14,
+          color: textSecondaryColor,
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: primaryColor,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          elevation: 0,
+          textStyle: GoogleFonts.inter(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: surfaceColor,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: primaryColor, width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: errorColor, width: 2),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: errorColor, width: 2),
+        ),
+        labelStyle: GoogleFonts.inter(
+          color: textSecondaryColor,
+        ),
+        hintStyle: GoogleFonts.inter(
+          color: textSecondaryColor.withOpacity(0.6),
+        ),
+      ),
+      cardTheme: CardTheme(
+        color: surfaceColor,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+    );
+  }
+}
+</file>
+
+<file path="lib/core/usecase/usecase.dart">
+import 'package:dartz/dartz.dart';
+import '../error/failures.dart';
+
+abstract class UseCase<Type, Params> {
+  Future<Either<Failure, Type>> call(Params params);
+}
+
+class NoParams {}
+</file>
+
+<file path="lib/features/auth/data/datasources/auth_remote_data_source.dart">
+import 'package:injectable/injectable.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../models/user_model.dart';
+
+abstract class AuthRemoteDataSource {
+  Future<UserModel> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  });
+
+  Future<UserModel> signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+    String? displayName,
+  });
+
+  Future<void> sendPasswordResetEmail({
+    required String email,
+  });
+
+  Future<void> signOut();
+
+  Future<UserModel?> getCurrentUser();
+
+  Stream<UserModel?> get authStateChanges;
+}
+
+@LazySingleton(as: AuthRemoteDataSource)
+class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  final SupabaseClient supabaseClient;
+
+  AuthRemoteDataSourceImpl(this.supabaseClient);
+
+  @override
+  Future<UserModel> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await supabaseClient.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+
+      if (response.user == null) {
+        throw Exception('No se pudo iniciar sesión');
+      }
+
+      return UserModel.fromSupabaseUser(response.user!);
+    } on AuthException catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception('Error al iniciar sesión: $e');
+    }
+  }
+
+  @override
+  Future<UserModel> signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+    String? displayName,
+  }) async {
+    try {
+      final response = await supabaseClient.auth.signUp(
+        email: email,
+        password: password,
+        data: displayName != null ? {'display_name': displayName} : null,
+      );
+
+      if (response.user == null) {
+        throw Exception('No se pudo crear la cuenta');
+      }
+
+      return UserModel.fromSupabaseUser(response.user!);
+    } on AuthException catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception('Error al registrarse: $e');
+    }
+  }
+
+  @override
+  Future<void> sendPasswordResetEmail({
+    required String email,
+  }) async {
+    try {
+      await supabaseClient.auth.resetPasswordForEmail(email);
+    } on AuthException catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception('Error al enviar email de recuperación: $e');
+    }
+  }
+
+  @override
+  Future<void> signOut() async {
+    try {
+      await supabaseClient.auth.signOut();
+    } on AuthException catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception('Error al cerrar sesión: $e');
+    }
+  }
+
+  @override
+  Future<UserModel?> getCurrentUser() async {
+    try {
+      final user = supabaseClient.auth.currentUser;
+      if (user == null) return null;
+      return UserModel.fromSupabaseUser(user);
+    } catch (e) {
+      throw Exception('Error al obtener usuario actual: $e');
+    }
+  }
+
+  @override
+  Stream<UserModel?> get authStateChanges {
+    return supabaseClient.auth.onAuthStateChange.map((event) {
+      final user = event.session?.user;
+      if (user == null) return null;
+      return UserModel.fromSupabaseUser(user);
+    });
+  }
+}
+</file>
+
+<file path="lib/features/auth/data/models/user_model.dart">
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../domain/entities/user_entity.dart';
+
+class UserModel extends UserEntity {
+  const UserModel({
+    required super.id,
+    required super.email,
+    super.displayName,
+    super.photoUrl,
+    super.createdAt,
+  });
+
+  factory UserModel.fromSupabaseUser(User user) {
+    return UserModel(
+      id: user.id,
+      email: user.email ?? '',
+      displayName: user.userMetadata?['display_name'] as String?,
+      photoUrl: user.userMetadata?['avatar_url'] as String?,
+      createdAt: DateTime.parse(user.createdAt),
+    );
+  }
+
+  UserEntity toEntity() {
+    return UserEntity(
+      id: id,
+      email: email,
+      displayName: displayName,
+      photoUrl: photoUrl,
+      createdAt: createdAt,
+    );
+  }
+}
+</file>
+
+<file path="lib/features/auth/data/repositories/auth_repository_impl.dart">
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/network/network_info.dart';
+import '../../domain/entities/user_entity.dart';
+import '../../domain/repositories/auth_repository.dart';
+import '../datasources/auth_remote_data_source.dart';
+
+@LazySingleton(as: AuthRepository)
+class AuthRepositoryImpl implements AuthRepository {
+  final AuthRemoteDataSource remoteDataSource;
+  final NetworkInfo networkInfo;
+
+  AuthRepositoryImpl({
+    required this.remoteDataSource,
+    required this.networkInfo,
+  });
+
+  @override
+  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    if (!await networkInfo.isConnected) {
+      return const Left(NetworkFailure('Sin conexión a internet'));
+    }
+
+    try {
+      final user = await remoteDataSource.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return Right(user);
+    } catch (e) {
+      return Left(AuthFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+    String? displayName,
+  }) async {
+    if (!await networkInfo.isConnected) {
+      return const Left(NetworkFailure('Sin conexión a internet'));
+    }
+
+    try {
+      final user = await remoteDataSource.signUpWithEmailAndPassword(
+        email: email,
+        password: password,
+        displayName: displayName,
+      );
+      return Right(user);
+    } catch (e) {
+      return Left(AuthFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> sendPasswordResetEmail({
+    required String email,
+  }) async {
+    if (!await networkInfo.isConnected) {
+      return const Left(NetworkFailure('Sin conexión a internet'));
+    }
+
+    try {
+      await remoteDataSource.sendPasswordResetEmail(email: email);
+      return const Right(null);
+    } catch (e) {
+      return Left(AuthFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> signOut() async {
+    try {
+      await remoteDataSource.signOut();
+      return const Right(null);
+    } catch (e) {
+      return Left(AuthFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity?>> getCurrentUser() async {
+    try {
+      final user = await remoteDataSource.getCurrentUser();
+      return Right(user);
+    } catch (e) {
+      return Left(AuthFailure(e.toString()));
+    }
+  }
+
+  @override
+  Stream<UserEntity?> get authStateChanges {
+    return remoteDataSource.authStateChanges;
+  }
+}
+</file>
+
+<file path="lib/features/auth/domain/entities/user_entity.dart">
+import 'package:equatable/equatable.dart';
+
+class UserEntity extends Equatable {
+  final String id;
+  final String email;
+  final String? displayName;
+  final String? photoUrl;
+  final DateTime? createdAt;
+
+  const UserEntity({
+    required this.id,
+    required this.email,
+    this.displayName,
+    this.photoUrl,
+    this.createdAt,
+  });
+
+  @override
+  List<Object?> get props => [id, email, displayName, photoUrl, createdAt];
+}
+</file>
+
+<file path="lib/features/auth/domain/repositories/auth_repository.dart">
+import 'package:dartz/dartz.dart';
+import '../../../../core/error/failures.dart';
+import '../entities/user_entity.dart';
+
+abstract class AuthRepository {
+  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  });
+
+  Future<Either<Failure, UserEntity>> signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+    String? displayName,
+  });
+
+  Future<Either<Failure, void>> sendPasswordResetEmail({
+    required String email,
+  });
+
+  Future<Either<Failure, void>> signOut();
+
+  Future<Either<Failure, UserEntity?>> getCurrentUser();
+
+  Stream<UserEntity?> get authStateChanges;
+}
+</file>
+
+<file path="lib/features/auth/domain/usecases/get_current_user.dart">
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../entities/user_entity.dart';
+import '../repositories/auth_repository.dart';
+
+@injectable
+class GetCurrentUser implements UseCase<UserEntity?, NoParams> {
+  final AuthRepository repository;
+
+  GetCurrentUser(this.repository);
+
+  @override
+  Future<Either<Failure, UserEntity?>> call(NoParams params) async {
+    return await repository.getCurrentUser();
+  }
+}
+</file>
+
+<file path="lib/features/auth/domain/usecases/reset_password.dart">
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../repositories/auth_repository.dart';
+
+@injectable
+class ResetPassword implements UseCase<void, ResetPasswordParams> {
+  final AuthRepository repository;
+
+  ResetPassword(this.repository);
+
+  @override
+  Future<Either<Failure, void>> call(ResetPasswordParams params) async {
+    return await repository.sendPasswordResetEmail(
+      email: params.email,
+    );
+  }
+}
+
+class ResetPasswordParams {
+  final String email;
+
+  ResetPasswordParams({
+    required this.email,
+  });
+}
+</file>
+
+<file path="lib/features/auth/domain/usecases/sign_in.dart">
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../entities/user_entity.dart';
+import '../repositories/auth_repository.dart';
+
+@injectable
+class SignIn implements UseCase<UserEntity, SignInParams> {
+  final AuthRepository repository;
+
+  SignIn(this.repository);
+
+  @override
+  Future<Either<Failure, UserEntity>> call(SignInParams params) async {
+    return await repository.signInWithEmailAndPassword(
+      email: params.email,
+      password: params.password,
+    );
+  }
+}
+
+class SignInParams {
+  final String email;
+  final String password;
+
+  SignInParams({
+    required this.email,
+    required this.password,
+  });
+}
+</file>
+
+<file path="lib/features/auth/domain/usecases/sign_out.dart">
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../repositories/auth_repository.dart';
+
+@injectable
+class SignOut implements UseCase<void, NoParams> {
+  final AuthRepository repository;
+
+  SignOut(this.repository);
+
+  @override
+  Future<Either<Failure, void>> call(NoParams params) async {
+    return await repository.signOut();
+  }
+}
+</file>
+
+<file path="lib/features/auth/domain/usecases/sign_up.dart">
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../entities/user_entity.dart';
+import '../repositories/auth_repository.dart';
+
+@injectable
+class SignUp implements UseCase<UserEntity, SignUpParams> {
+  final AuthRepository repository;
+
+  SignUp(this.repository);
+
+  @override
+  Future<Either<Failure, UserEntity>> call(SignUpParams params) async {
+    return await repository.signUpWithEmailAndPassword(
+      email: params.email,
+      password: params.password,
+      displayName: params.displayName,
+    );
+  }
+}
+
+class SignUpParams {
+  final String email;
+  final String password;
+  final String? displayName;
+
+  SignUpParams({
+    required this.email,
+    required this.password,
+    this.displayName,
+  });
+}
+</file>
+
+<file path="lib/features/auth/presentation/bloc/auth_bloc.dart">
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../domain/usecases/get_current_user.dart';
+import '../../domain/usecases/reset_password.dart';
+import '../../domain/usecases/sign_in.dart';
+import '../../domain/usecases/sign_out.dart';
+import '../../domain/usecases/sign_up.dart';
+import 'auth_event.dart';
+import 'auth_state.dart';
+
+@injectable
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  final SignIn signIn;
+  final SignUp signUp;
+  final ResetPassword resetPassword;
+  final SignOut signOut;
+  final GetCurrentUser getCurrentUser;
+
+  AuthBloc({
+    required this.signIn,
+    required this.signUp,
+    required this.resetPassword,
+    required this.signOut,
+    required this.getCurrentUser,
+  }) : super(const AuthInitial()) {
+    on<SignInRequested>(_onSignInRequested);
+    on<SignUpRequested>(_onSignUpRequested);
+    on<ResetPasswordRequested>(_onResetPasswordRequested);
+    on<SignOutRequested>(_onSignOutRequested);
+    on<AuthCheckRequested>(_onAuthCheckRequested);
+  }
+
+  Future<void> _onSignInRequested(
+    SignInRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(const AuthLoading());
+
+    final result = await signIn(
+      SignInParams(
+        email: event.email,
+        password: event.password,
+      ),
+    );
+
+    result.fold(
+      (failure) => emit(AuthError(failure.message)),
+      (user) => emit(AuthAuthenticated(user)),
+    );
+  }
+
+  Future<void> _onSignUpRequested(
+    SignUpRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(const AuthLoading());
+
+    final result = await signUp(
+      SignUpParams(
+        email: event.email,
+        password: event.password,
+        displayName: event.displayName,
+      ),
+    );
+
+    result.fold(
+      (failure) => emit(AuthError(failure.message)),
+      (user) => emit(EmailVerificationRequired(event.email)),
+    );
+  }
+
+  Future<void> _onResetPasswordRequested(
+    ResetPasswordRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(const AuthLoading());
+
+    final result = await resetPassword(
+      ResetPasswordParams(email: event.email),
+    );
+
+    result.fold(
+      (failure) => emit(AuthError(failure.message)),
+      (_) => emit(const ResetPasswordSent()),
+    );
+  }
+
+  Future<void> _onSignOutRequested(
+    SignOutRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(const AuthLoading());
+
+    final result = await signOut(NoParams());
+
+    result.fold(
+      (failure) => emit(AuthError(failure.message)),
+      (_) => emit(const AuthUnauthenticated()),
+    );
+  }
+
+  Future<void> _onAuthCheckRequested(
+    AuthCheckRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(const AuthLoading());
+
+    final result = await getCurrentUser(NoParams());
+
+    result.fold(
+      (failure) => emit(const AuthUnauthenticated()),
+      (user) {
+        if (user != null) {
+          emit(AuthAuthenticated(user));
+        } else {
+          emit(const AuthUnauthenticated());
+        }
+      },
+    );
+  }
+}
+</file>
+
+<file path="lib/features/auth/presentation/bloc/auth_event.dart">
+import 'package:equatable/equatable.dart';
+
+abstract class AuthEvent extends Equatable {
+  const AuthEvent();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class SignInRequested extends AuthEvent {
+  final String email;
+  final String password;
+
+  const SignInRequested({
+    required this.email,
+    required this.password,
+  });
+
+  @override
+  List<Object> get props => [email, password];
+}
+
+class SignUpRequested extends AuthEvent {
+  final String email;
+  final String password;
+  final String? displayName;
+
+  const SignUpRequested({
+    required this.email,
+    required this.password,
+    this.displayName,
+  });
+
+  @override
+  List<Object?> get props => [email, password, displayName];
+}
+
+class ResetPasswordRequested extends AuthEvent {
+  final String email;
+
+  const ResetPasswordRequested({required this.email});
+
+  @override
+  List<Object> get props => [email];
+}
+
+class SignOutRequested extends AuthEvent {
+  const SignOutRequested();
+}
+
+class AuthCheckRequested extends AuthEvent {
+  const AuthCheckRequested();
+}
+</file>
+
+<file path="lib/features/auth/presentation/bloc/auth_state.dart">
+import 'package:equatable/equatable.dart';
+import '../../domain/entities/user_entity.dart';
+
+abstract class AuthState extends Equatable {
+  const AuthState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class AuthInitial extends AuthState {
+  const AuthInitial();
+}
+
+class AuthLoading extends AuthState {
+  const AuthLoading();
+}
+
+class AuthAuthenticated extends AuthState {
+  final UserEntity user;
+
+  const AuthAuthenticated(this.user);
+
+  @override
+  List<Object> get props => [user];
+}
+
+class AuthUnauthenticated extends AuthState {
+  const AuthUnauthenticated();
+}
+
+class AuthError extends AuthState {
+  final String message;
+
+  const AuthError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class ResetPasswordSent extends AuthState {
+  const ResetPasswordSent();
+}
+
+class EmailVerificationRequired extends AuthState {
+  final String email;
+
+  const EmailVerificationRequired(this.email);
+
+  @override
+  List<Object> get props => [email];
+}
+</file>
+
+<file path="lib/features/auth/presentation/pages/email_verification_sent_page.dart">
+import 'package:flutter/material.dart';
+
+class EmailVerificationSentPage extends StatelessWidget {
+  final String email;
+
+  const EmailVerificationSentPage({
+    super.key,
+    required this.email,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Icono de email
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.primary.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.mark_email_unread_rounded,
+                    size: 60,
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+                const SizedBox(height: 32),
+
+                // Título
+                Text(
+                  '¡Revisa tu correo!',
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+
+                // Mensaje
+                Text(
+                  'Hemos enviado un enlace de verificación a:',
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: theme.colorScheme.onSurface.withOpacity(0.7),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+
+                // Email
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    email,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Instrucciones
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.amber.withOpacity(0.3),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.info_outline,
+                        color: Colors.amber,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          'Debes confirmar tu correo electrónico para poder iniciar sesión en la aplicación.',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: Colors.amber.shade800,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+
+                // Pasos
+                _buildStep(
+                  context,
+                  number: '1',
+                  text: 'Abre tu bandeja de entrada',
+                  icon: Icons.inbox_rounded,
+                ),
+                const SizedBox(height: 12),
+                _buildStep(
+                  context,
+                  number: '2',
+                  text: 'Busca el correo de Login Pro',
+                  icon: Icons.search_rounded,
+                ),
+                const SizedBox(height: 12),
+                _buildStep(
+                  context,
+                  number: '3',
+                  text: 'Haz clic en el enlace de verificación',
+                  icon: Icons.link_rounded,
+                ),
+                const SizedBox(height: 40),
+
+                // Botón volver al login
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.icon(
+                    onPressed: () {
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                    },
+                    icon: const Icon(Icons.login_rounded),
+                    label: const Text('Ir a Iniciar Sesión'),
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Nota sobre spam
+                Text(
+                  '¿No encuentras el correo? Revisa tu carpeta de spam.',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurface.withOpacity(0.5),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStep(
+    BuildContext context, {
+    required String number,
+    required String text,
+    required IconData icon,
+  }) {
+    final theme = Theme.of(context);
+
+    return Row(
+      children: [
+        Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.primary,
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Text(
+              number,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Icon(
+          icon,
+          color: theme.colorScheme.primary.withOpacity(0.7),
+          size: 20,
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            text,
+            style: theme.textTheme.bodyMedium,
+          ),
+        ),
+      ],
+    );
+  }
+}
+</file>
+
+<file path="lib/features/auth/presentation/pages/login_page.dart">
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
+import '../bloc/auth_state.dart';
+import '../widgets/custom_text_field.dart';
+import '../widgets/loading_overlay.dart';
+import 'register_page.dart';
+import 'reset_password_page.dart';
+import 'welcome_page.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _handleSignIn() {
+    if (_formKey.currentState!.validate()) {
+      context.read<AuthBloc>().add(
+            SignInRequested(
+              email: _emailController.text.trim(),
+              password: _passwordController.text,
+            ),
+          );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Theme.of(context).colorScheme.error,
+              ),
+            );
+          } else if (state is AuthAuthenticated) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (_) => WelcomePage(user: state.user),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          final isLoading = state is AuthLoading;
+
+          return LoadingOverlay(
+            isLoading: isLoading,
+            child: SafeArea(
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // Logo o icono
+                        Icon(
+                          Icons.lock_person_rounded,
+                          size: 80,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Título
+                        Text(
+                          'Bienvenido',
+                          style: Theme.of(context).textTheme.displayMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Inicia sesión para continuar',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 48),
+
+                        // Email field
+                        CustomTextField(
+                          controller: _emailController,
+                          label: 'Correo electrónico',
+                          hint: 'tu@email.com',
+                          prefixIcon: Icons.email_outlined,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Por favor ingresa tu correo';
+                            }
+                            if (!value.contains('@')) {
+                              return 'Por favor ingresa un correo válido';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Password field
+                        CustomTextField(
+                          controller: _passwordController,
+                          label: 'Contraseña',
+                          hint: '••••••••',
+                          prefixIcon: Icons.lock_outline,
+                          isPassword: true,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Por favor ingresa tu contraseña';
+                            }
+                            if (value.length < 6) {
+                              return 'La contraseña debe tener al menos 6 caracteres';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 8),
+
+                        // Forgot password
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const ResetPasswordPage(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              '¿Olvidaste tu contraseña?',
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Login button
+                        SizedBox(
+                          height: 56,
+                          child: ElevatedButton(
+                            onPressed: isLoading ? null : _handleSignIn,
+                            child: const Text('Iniciar sesión'),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Register link
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '¿No tienes cuenta?',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const RegisterPage(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Regístrate',
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+</file>
+
+<file path="lib/features/auth/presentation/pages/register_page.dart">
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
+import '../bloc/auth_state.dart';
+import '../widgets/custom_text_field.dart';
+import '../widgets/loading_overlay.dart';
+import 'email_verification_sent_page.dart';
+import 'welcome_page.dart';
+
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  void _handleSignUp() {
+    if (_formKey.currentState!.validate()) {
+      context.read<AuthBloc>().add(
+            SignUpRequested(
+              email: _emailController.text.trim(),
+              password: _passwordController.text,
+              displayName: _nameController.text.trim(),
+            ),
+          );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Theme.of(context).colorScheme.error,
+              ),
+            );
+          } else if (state is EmailVerificationRequired) {
+            // Mostrar pantalla de verificación de email
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (_) => EmailVerificationSentPage(email: state.email),
+              ),
+            );
+          } else if (state is AuthAuthenticated) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (_) => WelcomePage(user: state.user),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          final isLoading = state is AuthLoading;
+
+          return LoadingOverlay(
+            isLoading: isLoading,
+            child: SafeArea(
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // Back button
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: IconButton(
+                            icon: const Icon(Icons.arrow_back),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Logo o icono
+                        Icon(
+                          Icons.person_add_rounded,
+                          size: 80,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Título
+                        Text(
+                          'Crear cuenta',
+                          style: Theme.of(context).textTheme.displayMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Regístrate para comenzar',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 48),
+
+                        // Name field
+                        CustomTextField(
+                          controller: _nameController,
+                          label: 'Nombre completo',
+                          hint: 'Juan Pérez',
+                          prefixIcon: Icons.person_outline,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Por favor ingresa tu nombre';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Email field
+                        CustomTextField(
+                          controller: _emailController,
+                          label: 'Correo electrónico',
+                          hint: 'tu@email.com',
+                          prefixIcon: Icons.email_outlined,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Por favor ingresa tu correo';
+                            }
+                            if (!value.contains('@')) {
+                              return 'Por favor ingresa un correo válido';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Password field
+                        CustomTextField(
+                          controller: _passwordController,
+                          label: 'Contraseña',
+                          hint: '••••••••',
+                          prefixIcon: Icons.lock_outline,
+                          isPassword: true,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Por favor ingresa una contraseña';
+                            }
+                            if (value.length < 6) {
+                              return 'La contraseña debe tener al menos 6 caracteres';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Confirm password field
+                        CustomTextField(
+                          controller: _confirmPasswordController,
+                          label: 'Confirmar contraseña',
+                          hint: '••••••••',
+                          prefixIcon: Icons.lock_outline,
+                          isPassword: true,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Por favor confirma tu contraseña';
+                            }
+                            if (value != _passwordController.text) {
+                              return 'Las contraseñas no coinciden';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 32),
+
+                        // Register button
+                        SizedBox(
+                          height: 56,
+                          child: ElevatedButton(
+                            onPressed: isLoading ? null : _handleSignUp,
+                            child: const Text('Crear cuenta'),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Info text
+                        Text(
+                          'Recibirás un correo de verificación para activar tu cuenta',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+</file>
+
+<file path="lib/features/auth/presentation/pages/reset_password_page.dart">
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
+import '../bloc/auth_state.dart';
+import '../widgets/custom_text_field.dart';
+import '../widgets/loading_overlay.dart';
+
+class ResetPasswordPage extends StatefulWidget {
+  const ResetPasswordPage({super.key});
+
+  @override
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
+}
+
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  void _handleResetPassword() {
+    if (_formKey.currentState!.validate()) {
+      context.read<AuthBloc>().add(
+            ResetPasswordRequested(
+              email: _emailController.text.trim(),
+            ),
+          );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Theme.of(context).colorScheme.error,
+              ),
+            );
+          } else if (state is ResetPasswordSent) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text(
+                  'Se ha enviado un correo de recuperación. Por favor revisa tu bandeja de entrada.',
+                ),
+                backgroundColor: Colors.green,
+                duration: const Duration(seconds: 5),
+              ),
+            );
+            Navigator.of(context).pop();
+          }
+        },
+        builder: (context, state) {
+          final isLoading = state is AuthLoading;
+
+          return LoadingOverlay(
+            isLoading: isLoading,
+            child: SafeArea(
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // Back button
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: IconButton(
+                            icon: const Icon(Icons.arrow_back),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Logo o icono
+                        Icon(
+                          Icons.lock_reset_rounded,
+                          size: 80,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Título
+                        Text(
+                          'Recuperar contraseña',
+                          style: Theme.of(context).textTheme.displayMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 48),
+
+                        // Email field
+                        CustomTextField(
+                          controller: _emailController,
+                          label: 'Correo electrónico',
+                          hint: 'tu@email.com',
+                          prefixIcon: Icons.email_outlined,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Por favor ingresa tu correo';
+                            }
+                            if (!value.contains('@')) {
+                              return 'Por favor ingresa un correo válido';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 32),
+
+                        // Send button
+                        SizedBox(
+                          height: 56,
+                          child: ElevatedButton(
+                            onPressed: isLoading ? null : _handleResetPassword,
+                            child: const Text('Enviar enlace de recuperación'),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Info card
+                        Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.info_outline,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    'Recibirás un enlace para crear una nueva contraseña',
+                                    style: Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+</file>
+
+<file path="lib/features/auth/presentation/pages/welcome_page.dart">
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/entities/user_entity.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
+import '../bloc/auth_state.dart';
+import 'login_page.dart';
+
+class WelcomePage extends StatelessWidget {
+  final UserEntity user;
+
+  const WelcomePage({super.key, required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthUnauthenticated) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (_) => const LoginPage(),
+              ),
+            );
+          }
+        },
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Animated icon
+                TweenAnimationBuilder(
+                  duration: const Duration(milliseconds: 800),
+                  tween: Tween<double>(begin: 0, end: 1),
+                  builder: (context, value, child) {
+                    return Transform.scale(
+                      scale: value,
+                      child: child,
+                    );
+                  },
+                  child: Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.check_circle_rounded,
+                      size: 80,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 32),
+
+                // Welcome title
+                Text(
+                  '¡Bienvenido!',
+                  style: Theme.of(context).textTheme.displayLarge,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+
+                // User name
+                if (user.displayName != null && user.displayName!.isNotEmpty)
+                  Text(
+                    user.displayName!,
+                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                const SizedBox(height: 8),
+
+                // User email
+                Text(
+                  user.email,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 48),
+
+                // Success card
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.celebration_rounded,
+                          size: 48,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Has iniciado sesión correctamente',
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Tu cuenta está activa y lista para usar',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 48),
+
+                // Logout button
+                SizedBox(
+                  height: 56,
+                  child: OutlinedButton.icon(
+                    onPressed: () {
+                      context.read<AuthBloc>().add(const SignOutRequested());
+                    },
+                    icon: const Icon(Icons.logout_rounded),
+                    label: const Text('Cerrar sesión'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Theme.of(context).colorScheme.primary,
+                      side: BorderSide(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 2,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+</file>
+
+<file path="lib/features/auth/presentation/widgets/custom_text_field.dart">
+import 'package:flutter/material.dart';
+
+class CustomTextField extends StatefulWidget {
+  final TextEditingController controller;
+  final String label;
+  final String hint;
+  final IconData? prefixIcon;
+  final bool isPassword;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
+
+  const CustomTextField({
+    super.key,
+    required this.controller,
+    required this.label,
+    required this.hint,
+    this.prefixIcon,
+    this.isPassword = false,
+    this.keyboardType,
+    this.validator,
+  });
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  bool _obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: widget.controller,
+      obscureText: widget.isPassword && _obscureText,
+      keyboardType: widget.keyboardType,
+      validator: widget.validator,
+      decoration: InputDecoration(
+        labelText: widget.label,
+        hintText: widget.hint,
+        prefixIcon: widget.prefixIcon != null
+            ? Icon(widget.prefixIcon, color: Theme.of(context).colorScheme.primary)
+            : null,
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                icon: Icon(
+                  _obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+              )
+            : null,
+      ),
+    );
+  }
+}
+</file>
+
+<file path="lib/features/auth/presentation/widgets/loading_overlay.dart">
+import 'package:flutter/material.dart';
+
+class LoadingOverlay extends StatelessWidget {
+  final bool isLoading;
+  final Widget child;
+
+  const LoadingOverlay({
+    super.key,
+    required this.isLoading,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        child,
+        if (isLoading)
+          Container(
+            color: Colors.black.withOpacity(0.3),
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+      ],
+    );
+  }
+}
+</file>
+
+<file path="lib/injection_container.config.dart">
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// **************************************************************************
+// InjectableConfigGenerator
+// **************************************************************************
+
+// ignore_for_file: type=lint
+// coverage:ignore-file
+
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
+import 'package:get_it/get_it.dart' as _i174;
+import 'package:injectable/injectable.dart' as _i526;
+import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
+
+import 'core/network/network_info.dart' as _i1054;
+import 'features/auth/data/datasources/auth_remote_data_source.dart'
+    as _i796;
+import 'features/auth/data/repositories/auth_repository_impl.dart' as _i529;
+import 'features/auth/domain/repositories/auth_repository.dart' as _i742;
+import 'features/auth/domain/usecases/get_current_user.dart' as _i833;
+import 'features/auth/domain/usecases/reset_password.dart' as _i420;
+import 'features/auth/domain/usecases/sign_in.dart' as _i390;
+import 'features/auth/domain/usecases/sign_out.dart' as _i71;
+import 'features/auth/domain/usecases/sign_up.dart' as _i341;
+import 'features/auth/presentation/bloc/auth_bloc.dart' as _i1026;
+
+extension GetItInjectableX on _i174.GetIt {
+  // initializes the registration of main-scope dependencies inside of GetIt
+  _i174.GetIt init({
+    String? environment,
+    _i526.EnvironmentFilter? environmentFilter,
+  }) {
+    final gh = _i526.GetItHelper(
+      this,
+      environment,
+      environmentFilter,
+    );
+    gh.lazySingleton<_i1054.NetworkInfo>(
+        () => _i1054.NetworkInfoImpl(gh<_i895.Connectivity>()));
+    gh.lazySingleton<_i796.AuthRemoteDataSource>(
+        () => _i796.AuthRemoteDataSourceImpl(gh<_i454.SupabaseClient>()));
+    gh.lazySingleton<_i742.AuthRepository>(() => _i529.AuthRepositoryImpl(
+          remoteDataSource: gh<_i796.AuthRemoteDataSource>(),
+          networkInfo: gh<_i1054.NetworkInfo>(),
+        ));
+    gh.factory<_i390.SignIn>(() => _i390.SignIn(gh<_i742.AuthRepository>()));
+    gh.factory<_i341.SignUp>(() => _i341.SignUp(gh<_i742.AuthRepository>()));
+    gh.factory<_i420.ResetPassword>(
+        () => _i420.ResetPassword(gh<_i742.AuthRepository>()));
+    gh.factory<_i71.SignOut>(() => _i71.SignOut(gh<_i742.AuthRepository>()));
+    gh.factory<_i833.GetCurrentUser>(
+        () => _i833.GetCurrentUser(gh<_i742.AuthRepository>()));
+    gh.factory<_i1026.AuthBloc>(() => _i1026.AuthBloc(
+          signIn: gh<_i390.SignIn>(),
+          signUp: gh<_i341.SignUp>(),
+          resetPassword: gh<_i420.ResetPassword>(),
+          signOut: gh<_i71.SignOut>(),
+          getCurrentUser: gh<_i833.GetCurrentUser>(),
+        ));
+    return this;
+  }
+}
+</file>
+
+<file path="lib/injection_container.dart">
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'core/constants/app_constants.dart';
+import 'injection_container.config.dart';
+
+final getIt = GetIt.instance;
+
+@InjectableInit()
+Future<void> configureDependencies() async {
+  // Initialize Supabase
+  await Supabase.initialize(
+    url: AppConstants.supabaseUrl,
+    anonKey: AppConstants.supabaseAnonKey,
+  );
+
+  // Register external dependencies
+  getIt.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
+  getIt.registerLazySingleton<Connectivity>(() => Connectivity());
+
+  // Initialize injectable
+  getIt.init();
+}
+</file>
+
+<file path="lib/main.dart">
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'core/theme/app_theme.dart';
+import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/auth/presentation/bloc/auth_event.dart';
+import 'features/auth/presentation/bloc/auth_state.dart';
+import 'features/auth/presentation/pages/login_page.dart';
+import 'features/auth/presentation/pages/welcome_page.dart';
+import 'injection_container.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Load environment variables
+  await dotenv.load(fileName: '.env');
+
+  await configureDependencies();
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<AuthBloc>()..add(const AuthCheckRequested()),
+      child: MaterialApp(
+        title: 'Login Pro',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        home: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            if (state is AuthLoading || state is AuthInitial) {
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            } else if (state is AuthAuthenticated) {
+              return WelcomePage(user: state.user);
+            } else {
+              return const LoginPage();
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
+</file>
+
+<file path="pubspec.lock">
+# Generated by pub
+# See https://dart.dev/tools/pub/glossary#lockfile
+packages:
+  _fe_analyzer_shared:
+    dependency: transitive
+    description:
+      name: _fe_analyzer_shared
+      sha256: da0d9209ca76bde579f2da330aeb9df62b6319c834fa7baae052021b0462401f
+      url: "https://pub.dev"
+    source: hosted
+    version: "85.0.0"
+  adaptive_number:
+    dependency: transitive
+    description:
+      name: adaptive_number
+      sha256: "3a567544e9b5c9c803006f51140ad544aedc79604fd4f3f2c1380003f97c1d77"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  analyzer:
+    dependency: transitive
+    description:
+      name: analyzer
+      sha256: "974859dc0ff5f37bc4313244b3218c791810d03ab3470a579580279ba971a48d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.7.1"
+  app_links:
+    dependency: "direct main"
+    description:
+      name: app_links
+      sha256: "5f88447519add627fe1cbcab4fd1da3d4fed15b9baf29f28b22535c95ecee3e8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.4.1"
+  app_links_linux:
+    dependency: transitive
+    description:
+      name: app_links_linux
+      sha256: f5f7173a78609f3dfd4c2ff2c95bd559ab43c80a87dc6a095921d96c05688c81
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
+  app_links_platform_interface:
+    dependency: transitive
+    description:
+      name: app_links_platform_interface
+      sha256: "05f5379577c513b534a29ddea68176a4d4802c46180ee8e2e966257158772a3f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
+  app_links_web:
+    dependency: transitive
+    description:
+      name: app_links_web
+      sha256: af060ed76183f9e2b87510a9480e56a5352b6c249778d07bd2c95fc35632a555
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
+  args:
+    dependency: transitive
+    description:
+      name: args
+      sha256: d0481093c50b1da8910eb0bb301626d4d8eb7284aa739614d2b394ee09e3ea04
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.0"
+  async:
+    dependency: transitive
+    description:
+      name: async
+      sha256: "947bfcf187f74dbc5e146c9eb9c0f10c9f8b30743e341481c1e2ed3ecc18c20c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.11.0"
+  bloc:
+    dependency: transitive
+    description:
+      name: bloc
+      sha256: "106842ad6569f0b60297619e9e0b1885c2fb9bf84812935490e6c5275777804e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.1.4"
+  boolean_selector:
+    dependency: transitive
+    description:
+      name: boolean_selector
+      sha256: "6cfb5af12253eaf2b368f07bacc5a80d1301a071c73360d746b7f2e32d762c66"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  build:
+    dependency: transitive
+    description:
+      name: build
+      sha256: cef23f1eda9b57566c81e2133d196f8e3df48f244b317368d65c5943d91148f0
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.2"
+  build_config:
+    dependency: transitive
+    description:
+      name: build_config
+      sha256: "4ae2de3e1e67ea270081eaee972e1bd8f027d459f249e0f1186730784c2e7e33"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
+  build_daemon:
+    dependency: transitive
+    description:
+      name: build_daemon
+      sha256: "8e928697a82be082206edb0b9c99c5a4ad6bc31c9e9b8b2f291ae65cd4a25daa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.4"
+  build_resolvers:
+    dependency: transitive
+    description:
+      name: build_resolvers
+      sha256: b9e4fda21d846e192628e7a4f6deda6888c36b5b69ba02ff291a01fd529140f0
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.4"
+  build_runner:
+    dependency: "direct dev"
+    description:
+      name: build_runner
+      sha256: "058fe9dce1de7d69c4b84fada934df3e0153dd000758c4d65964d0166779aa99"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.15"
+  build_runner_core:
+    dependency: transitive
+    description:
+      name: build_runner_core
+      sha256: "22e3aa1c80e0ada3722fe5b63fd43d9c8990759d0a2cf489c8c5d7b2bdebc021"
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.0.0"
+  built_collection:
+    dependency: transitive
+    description:
+      name: built_collection
+      sha256: "376e3dd27b51ea877c28d525560790aee2e6fbb5f20e2f85d5081027d94e2100"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.1"
+  built_value:
+    dependency: transitive
+    description:
+      name: built_value
+      sha256: "426cf75afdb23aa74bd4e471704de3f9393f3c7b04c1e2d9c6f1073ae0b8b139"
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.12.1"
+  characters:
+    dependency: transitive
+    description:
+      name: characters
+      sha256: "04a925763edad70e8443c99234dc3328f442e811f1d8fd1a72f1c8ad0f69a605"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.0"
+  checked_yaml:
+    dependency: transitive
+    description:
+      name: checked_yaml
+      sha256: feb6bed21949061731a7a75fc5d2aa727cf160b91af9a3e464c5e3a32e28b5ff
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
+  clock:
+    dependency: transitive
+    description:
+      name: clock
+      sha256: cb6d7f03e1de671e34607e909a7213e31d7752be4fb66a86d29fe1eb14bfb5cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
+  code_builder:
+    dependency: transitive
+    description:
+      name: code_builder
+      sha256: "0ec10bf4a89e4c613960bf1e8b42c64127021740fb21640c29c909826a5eea3e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.10.1"
+  collection:
+    dependency: transitive
+    description:
+      name: collection
+      sha256: a1ace0a119f20aabc852d165077c036cd864315bd99b7eaa10a60100341941bf
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.19.0"
+  connectivity_plus:
+    dependency: "direct main"
+    description:
+      name: connectivity_plus
+      sha256: b5e72753cf63becce2c61fd04dfe0f1c430cc5278b53a1342dc5ad839eab29ec
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.5"
+  connectivity_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: connectivity_plus_platform_interface
+      sha256: "42657c1715d48b167930d5f34d00222ac100475f73d10162ddf43e714932f204"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
+  convert:
+    dependency: transitive
+    description:
+      name: convert
+      sha256: b30acd5944035672bc15c6b7a8b47d773e41e2f17de064350988c5d02adb1c68
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      sha256: "7caf6a750a0c04effbb52a676dce9a4a592e10ad35c34d6d2d0e4811160d5670"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.4+2"
+  crypto:
+    dependency: transitive
+    description:
+      name: crypto
+      sha256: c8ea0233063ba03258fbcf2ca4d6dadfefe14f02fab57702265467a19f27fadf
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.7"
+  cupertino_icons:
+    dependency: "direct main"
+    description:
+      name: cupertino_icons
+      sha256: ba631d1c7f7bef6b729a622b7b752645a2d076dba9976925b8f25725a30e1ee6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.8"
+  dart_earcut:
+    dependency: transitive
+    description:
+      name: dart_earcut
+      sha256: e485001bfc05dcbc437d7bfb666316182e3522d4c3f9668048e004d0eb2ce43b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  dart_jsonwebtoken:
+    dependency: transitive
+    description:
+      name: dart_jsonwebtoken
+      sha256: "00a0812d2aeaeb0d30bcbc4dd3cee57971dbc0ab2216adf4f0247f37793f15ef"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.17.0"
+  dart_style:
+    dependency: transitive
+    description:
+      name: dart_style
+      sha256: "27eb0ae77836989a3bc541ce55595e8ceee0992807f14511552a898ddd0d88ac"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
+  dartz:
+    dependency: "direct main"
+    description:
+      name: dartz
+      sha256: e6acf34ad2e31b1eb00948692468c30ab48ac8250e0f0df661e29f12dd252168
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.1"
+  dbus:
+    dependency: transitive
+    description:
+      name: dbus
+      sha256: "79e0c23480ff85dc68de79e2cd6334add97e48f7f4865d17686dd6ea81a47e8c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.11"
+  ed25519_edwards:
+    dependency: transitive
+    description:
+      name: ed25519_edwards
+      sha256: "6ce0112d131327ec6d42beede1e5dfd526069b18ad45dcf654f15074ad9276cd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.1"
+  equatable:
+    dependency: "direct main"
+    description:
+      name: equatable
+      sha256: "3e0141505477fd8ad55d6eb4e7776d3fe8430be8e497ccb1521370c3f21a3e2b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.8"
+  fake_async:
+    dependency: transitive
+    description:
+      name: fake_async
+      sha256: "511392330127add0b769b75a987850d136345d9227c6b94c96a04cf4a391bf78"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.1"
+  ffi:
+    dependency: transitive
+    description:
+      name: ffi
+      sha256: "16ed7b077ef01ad6170a3d0c57caa4a112a38d7a2ed5602e0aca9ca6f3d98da6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.3"
+  file:
+    dependency: transitive
+    description:
+      name: file
+      sha256: a3b4f84adafef897088c160faf7dfffb7696046cb13ae90b508c2cbc95d3b8d4
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.1"
+  file_selector_linux:
+    dependency: transitive
+    description:
+      name: file_selector_linux
+      sha256: "54cbbd957e1156d29548c7d9b9ec0c0ebb6de0a90452198683a7d23aed617a33"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.3+2"
+  file_selector_macos:
+    dependency: transitive
+    description:
+      name: file_selector_macos
+      sha256: "8c9250b2bd2d8d4268e39c82543bacbaca0fda7d29e0728c3c4bbb7c820fd711"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.4+3"
+  file_selector_platform_interface:
+    dependency: transitive
+    description:
+      name: file_selector_platform_interface
+      sha256: a3994c26f10378a039faa11de174d7b78eb8f79e4dd0af2a451410c1a5c3f66b
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.2"
+  file_selector_windows:
+    dependency: transitive
+    description:
+      name: file_selector_windows
+      sha256: "320fcfb6f33caa90f0b58380489fc5ac05d99ee94b61aa96ec2bff0ba81d3c2b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.3+4"
+  fixnum:
+    dependency: transitive
+    description:
+      name: fixnum
+      sha256: b6dc7065e46c974bc7c5f143080a6764ec7a4be6da1285ececdc37be96de53be
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
+  flutter:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_bloc:
+    dependency: "direct main"
+    description:
+      name: flutter_bloc
+      sha256: b594505eac31a0518bdcb4b5b79573b8d9117b193cc80cc12e17d639b10aa27a
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.1.6"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: b7c7be5cd9f6ef7a78429cabd2774d3c4af50e79cb2b7593e3d5d763ef95c61b
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
+  flutter_lints:
+    dependency: "direct dev"
+    description:
+      name: flutter_lints
+      sha256: "5398f14efa795ffb7a33e9b6a08798b26a180edac4ad7db3f231e40f82ce11e1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.0"
+  flutter_map:
+    dependency: "direct main"
+    description:
+      name: flutter_map
+      sha256: "2ecb34619a4be19df6f40c2f8dce1591675b4eff7a6857bd8f533706977385da"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.2"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: "6382ce712ff69b0f719640ce957559dde459e55ecd433c767e06d139ddf16cab"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.29"
+  flutter_svg:
+    dependency: "direct main"
+    description:
+      name: flutter_svg
+      sha256: cd57f7969b4679317c17af6fd16ee233c1e60a82ed209d8a475c54fd6fd6f845
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  flutter_test:
+    dependency: "direct dev"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  frontend_server_client:
+    dependency: transitive
+    description:
+      name: frontend_server_client
+      sha256: f64a0333a82f30b0cca061bc3d143813a486dc086b574bfb233b7c1372427694
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
+  functions_client:
+    dependency: transitive
+    description:
+      name: functions_client
+      sha256: "94074d62167ae634127ef6095f536835063a7dc80f2b1aa306d2346ff9023996"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.0"
+  geocoding:
+    dependency: "direct main"
+    description:
+      name: geocoding
+      sha256: d580c801cba9386b4fac5047c4c785a4e19554f46be42f4f5e5b7deacd088a66
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  geocoding_android:
+    dependency: transitive
+    description:
+      name: geocoding_android
+      sha256: "1b13eca79b11c497c434678fed109c2be020b158cec7512c848c102bc7232603"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.1"
+  geocoding_ios:
+    dependency: transitive
+    description:
+      name: geocoding_ios
+      sha256: "18ab1c8369e2b0dcb3a8ccc907319334f35ee8cf4cfef4d9c8e23b13c65cb825"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
+  geocoding_platform_interface:
+    dependency: transitive
+    description:
+      name: geocoding_platform_interface
+      sha256: "8c2c8226e5c276594c2e18bfe88b19110ed770aeb7c1ab50ede570be8b92229b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
+  geolocator:
+    dependency: "direct main"
+    description:
+      name: geolocator
+      sha256: f62bcd90459e63210bbf9c35deb6a51c521f992a78de19a1fe5c11704f9530e2
+      url: "https://pub.dev"
+    source: hosted
+    version: "13.0.4"
+  geolocator_android:
+    dependency: transitive
+    description:
+      name: geolocator_android
+      sha256: fcb1760a50d7500deca37c9a666785c047139b5f9ee15aa5469fae7dbbe3170d
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.6.2"
+  geolocator_apple:
+    dependency: transitive
+    description:
+      name: geolocator_apple
+      sha256: dbdd8789d5aaf14cf69f74d4925ad1336b4433a6efdf2fce91e8955dc921bf22
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.13"
+  geolocator_platform_interface:
+    dependency: transitive
+    description:
+      name: geolocator_platform_interface
+      sha256: "30cb64f0b9adcc0fb36f628b4ebf4f731a2961a0ebd849f4b56200205056fe67"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.6"
+  geolocator_web:
+    dependency: transitive
+    description:
+      name: geolocator_web
+      sha256: b1ae9bdfd90f861fde8fd4f209c37b953d65e92823cb73c7dee1fa021b06f172
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.3"
+  geolocator_windows:
+    dependency: transitive
+    description:
+      name: geolocator_windows
+      sha256: "175435404d20278ffd220de83c2ca293b73db95eafbdc8131fe8609be1421eb6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.5"
+  get_it:
+    dependency: "direct main"
+    description:
+      name: get_it
+      sha256: d85128a5dae4ea777324730dc65edd9c9f43155c109d5cc0a69cab74139fbac1
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.7.0"
+  glob:
+    dependency: transitive
+    description:
+      name: glob
+      sha256: c3f1ee72c96f8f78935e18aa8cecced9ab132419e8625dc187e1c2408efc20de
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.3"
+  go_router:
+    dependency: "direct main"
+    description:
+      name: go_router
+      sha256: f02fd7d2a4dc512fec615529824fdd217fecb3a3d3de68360293a551f21634b3
+      url: "https://pub.dev"
+    source: hosted
+    version: "14.8.1"
+  google_fonts:
+    dependency: "direct main"
+    description:
+      name: google_fonts
+      sha256: df9763500dadba0155373e9cb44e202ce21bd9ed5de6bdbd05c5854e86839cb8
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.0"
+  google_generative_ai:
+    dependency: "direct main"
+    description:
+      name: google_generative_ai
+      sha256: "71f613d0247968992ad87a0eb21650a566869757442ba55a31a81be6746e0d1f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.7"
+  gotrue:
+    dependency: transitive
+    description:
+      name: gotrue
+      sha256: f7b52008311941a7c3e99f9590c4ee32dfc102a5442e43abf1b287d9f8cc39b2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.18.0"
+  graphs:
+    dependency: transitive
+    description:
+      name: graphs
+      sha256: "741bbf84165310a68ff28fe9e727332eef1407342fca52759cb21ad8177bb8d0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.2"
+  gtk:
+    dependency: transitive
+    description:
+      name: gtk
+      sha256: e8ce9ca4b1df106e4d72dad201d345ea1a036cc12c360f1a7d5a758f78ffa42c
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      sha256: "87721a4a50b19c7f1d49001e51409bddc46303966ce89a65af4f4e6004896412"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.6.0"
+  http_multi_server:
+    dependency: transitive
+    description:
+      name: http_multi_server
+      sha256: aa6199f908078bb1c5efb8d8638d4ae191aac11b311132c3ef48ce352fb52ef8
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.2"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      sha256: "178d74305e7866013777bab2c3d8726205dc5a4dd935297175b19a23a2e66571"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.2"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      sha256: "736eb56a911cf24d1859315ad09ddec0b66104bc41a7f8c5b96b4e2620cf5041"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  image_picker_android:
+    dependency: transitive
+    description:
+      name: image_picker_android
+      sha256: e83b2b05141469c5e19d77e1dfa11096b6b1567d09065b2265d7c6904560050c
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.13"
+  image_picker_for_web:
+    dependency: transitive
+    description:
+      name: image_picker_for_web
+      sha256: "40c2a6a0da15556dc0f8e38a3246064a971a9f512386c3339b89f76db87269b6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
+  image_picker_ios:
+    dependency: transitive
+    description:
+      name: image_picker_ios
+      sha256: eb06fe30bab4c4497bad449b66448f50edcc695f1c59408e78aa3a8059eb8f0e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.13"
+  image_picker_linux:
+    dependency: transitive
+    description:
+      name: image_picker_linux
+      sha256: "1f81c5f2046b9ab724f85523e4af65be1d47b038160a8c8deed909762c308ed4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2"
+  image_picker_macos:
+    dependency: transitive
+    description:
+      name: image_picker_macos
+      sha256: d58cd9d67793d52beefd6585b12050af0a7663c0c2a6ece0fb110a35d6955e04
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2"
+  image_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      sha256: "9f143b0dba3e459553209e20cc425c9801af48e6dfa4f01a0fcf927be3f41665"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.11.0"
+  image_picker_windows:
+    dependency: transitive
+    description:
+      name: image_picker_windows
+      sha256: d248c86554a72b5495a31c56f060cf73a41c7ff541689327b1a7dbccc33adfae
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2"
+  injectable:
+    dependency: "direct main"
+    description:
+      name: injectable
+      sha256: "1b86fab6a98c11a97e5c718afb00e628d47d183c2a2256392e995a4c561141c1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.1"
+  injectable_generator:
+    dependency: "direct dev"
+    description:
+      name: injectable_generator
+      sha256: b04673a4c88b3a848c0c77bf58b8309f9b9e064d9fe1df5450c8ee1675eaea1a
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.0"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.19.0"
+  io:
+    dependency: transitive
+    description:
+      name: io
+      sha256: dfd5a80599cf0165756e3181807ed3e77daf6dd4137caaad72d0b7931597650b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      sha256: c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.1"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.9.0"
+  jwt_decode:
+    dependency: transitive
+    description:
+      name: jwt_decode
+      sha256: d2e9f68c052b2225130977429d30f187aa1981d789c76ad104a32243cfdebfbb
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.1"
+  latlong2:
+    dependency: "direct main"
+    description:
+      name: latlong2
+      sha256: "98227922caf49e6056f91b6c56945ea1c7b166f28ffcd5fb8e72fc0b453cc8fe"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.1"
+  leak_tracker:
+    dependency: transitive
+    description:
+      name: leak_tracker
+      sha256: "7bb2830ebd849694d1ec25bf1f44582d6ac531a57a365a803a6034ff751d2d06"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.0.7"
+  leak_tracker_flutter_testing:
+    dependency: transitive
+    description:
+      name: leak_tracker_flutter_testing
+      sha256: "9491a714cca3667b60b5c420da8217e6de0d1ba7a5ec322fab01758f6998f379"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.8"
+  leak_tracker_testing:
+    dependency: transitive
+    description:
+      name: leak_tracker_testing
+      sha256: "6ba465d5d76e67ddf503e1161d1f4a6bc42306f9d66ca1e8f079a47290fb06d3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
+  lints:
+    dependency: transitive
+    description:
+      name: lints
+      sha256: c35bb79562d980e9a453fc715854e1ed39e24e7d0297a880ef54e17f9874a9d7
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.1"
+  lists:
+    dependency: transitive
+    description:
+      name: lists
+      sha256: "4ca5c19ae4350de036a7e996cdd1ee39c93ac0a2b840f4915459b7d0a7d4ab27"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      sha256: a7967e31b703831a893bbc3c3dd11db08126fe5f369b5c648a36f821979f5be3
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.2"
+  logging:
+    dependency: transitive
+    description:
+      name: logging
+      sha256: c8245ada5f1717ed44271ed1c26b8ce85ca3228fd2ffdb75468ab01979309d61
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.0"
+  matcher:
+    dependency: transitive
+    description:
+      name: matcher
+      sha256: d2323aa2060500f906aa31a895b4030b6da3ebdcc5619d14ce1aada65cd161cb
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.12.16+1"
+  material_color_utilities:
+    dependency: transitive
+    description:
+      name: material_color_utilities
+      sha256: f7142bb1154231d7ea5f96bc7bde4bda2a0945d2806bb11670e30b850d56bdec
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.11.1"
+  meta:
+    dependency: transitive
+    description:
+      name: meta
+      sha256: bdb68674043280c3428e9ec998512fb681678676b3c54e773629ffe74419f8c7
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.15.0"
+  mgrs_dart:
+    dependency: transitive
+    description:
+      name: mgrs_dart
+      sha256: fb89ae62f05fa0bb90f70c31fc870bcbcfd516c843fb554452ab3396f78586f7
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
+  mime:
+    dependency: transitive
+    description:
+      name: mime
+      sha256: "41a20518f0cb1256669420fdba0cd90d21561e560ac240f26ef8322e45bb7ed6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  nm:
+    dependency: transitive
+    description:
+      name: nm
+      sha256: "2c9aae4127bdc8993206464fcc063611e0e36e72018696cd9631023a31b24254"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
+  package_config:
+    dependency: transitive
+    description:
+      name: package_config
+      sha256: f096c55ebb7deb7e384101542bfba8c52696c1b56fca2eb62827989ef2353bbc
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  path:
+    dependency: transitive
+    description:
+      name: path
+      sha256: "087ce49c3f0dc39180befefc60fdb4acd8f8620e5682fe2476afd0b3688bb4af"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.9.0"
+  path_parsing:
+    dependency: transitive
+    description:
+      name: path_parsing
+      sha256: "883402936929eac138ee0a45da5b0f2c80f89913e6dc3bf77eb65b84b409c6ca"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
+  path_provider:
+    dependency: transitive
+    description:
+      name: path_provider
+      sha256: "50c5dd5b6e1aaf6fb3a78b33f6aa3afca52bf903a8a5298f53101fdaee55bbcd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.5"
+  path_provider_android:
+    dependency: transitive
+    description:
+      name: path_provider_android
+      sha256: d0d310befe2c8ab9e7f393288ccbb11b60c019c6b5afc21973eeee4dda2b35e9
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.17"
+  path_provider_foundation:
+    dependency: transitive
+    description:
+      name: path_provider_foundation
+      sha256: "4843174df4d288f5e29185bd6e72a6fbdf5a4a4602717eed565497429f179942"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
+  path_provider_linux:
+    dependency: transitive
+    description:
+      name: path_provider_linux
+      sha256: f7a1fe3a634fe7734c8d3f2766ad746ae2a2884abe22e241a8b301bf5cac3279
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.1"
+  path_provider_platform_interface:
+    dependency: transitive
+    description:
+      name: path_provider_platform_interface
+      sha256: "88f5779f72ba699763fa3a3b06aa4bf6de76c8e5de842cf6f29e2e06476c2334"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
+  path_provider_windows:
+    dependency: transitive
+    description:
+      name: path_provider_windows
+      sha256: bd6f00dbd873bfb70d0761682da2b3a2c2fccc2b9e84c495821639601d81afe7
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      sha256: c15605cd28af66339f8eb6fbe0e541bfe2d1b72d5825efc6598f3e0a31b9ad27
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.2"
+  platform:
+    dependency: transitive
+    description:
+      name: platform
+      sha256: "5d6b1b0036a5f331ebc77c850ebc8506cbc1e9416c27e59b439f917a902a4984"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.6"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.8"
+  pointycastle:
+    dependency: transitive
+    description:
+      name: pointycastle
+      sha256: "4be0097fcf3fd3e8449e53730c631200ebc7b88016acecab2b0da2f0149222fe"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.9.1"
+  polylabel:
+    dependency: transitive
+    description:
+      name: polylabel
+      sha256: "41b9099afb2aa6c1730bdd8a0fab1400d287694ec7615dd8516935fa3144214b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  pool:
+    dependency: transitive
+    description:
+      name: pool
+      sha256: "978783255c543aa3586a1b3c21f6e9d720eb315376a915872c61ef8b5c20177d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.2"
+  postgrest:
+    dependency: transitive
+    description:
+      name: postgrest
+      sha256: f4b6bb24b465c47649243ef0140475de8a0ec311dc9c75ebe573b2dcabb10460
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.0"
+  proj4dart:
+    dependency: transitive
+    description:
+      name: proj4dart
+      sha256: c8a659ac9b6864aa47c171e78d41bbe6f5e1d7bd790a5814249e6b68bc44324e
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  provider:
+    dependency: transitive
+    description:
+      name: provider
+      sha256: "4e82183fa20e5ca25703ead7e05de9e4cceed1fbd1eadc1ac3cb6f565a09f272"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.5+1"
+  pub_semver:
+    dependency: transitive
+    description:
+      name: pub_semver
+      sha256: "5bfcf68ca79ef689f8990d1160781b4bad40a3bd5e5218ad4076ddb7f4081585"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  pubspec_parse:
+    dependency: transitive
+    description:
+      name: pubspec_parse
+      sha256: "0560ba233314abbed0a48a2956f7f022cce7c3e1e73df540277da7544cad4082"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.0"
+  realtime_client:
+    dependency: transitive
+    description:
+      name: realtime_client
+      sha256: "5268afc208d02fb9109854d262c1ebf6ece224cd285199ae1d2f92d2ff49dbf1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.0"
+  recase:
+    dependency: transitive
+    description:
+      name: recase
+      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
+  retry:
+    dependency: transitive
+    description:
+      name: retry
+      sha256: "822e118d5b3aafed083109c72d5f484c6dc66707885e07c0fbcb8b986bba7efc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      sha256: "5c3004a4a8dbb94bd4bf5412a4def4acdaa12e12f269737a5751369e12d1a962"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.28.0"
+  shared_preferences:
+    dependency: transitive
+    description:
+      name: shared_preferences
+      sha256: "6e8bf70b7fef813df4e9a36f658ac46d107db4b4cfe1048b477d4e453a8159f5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.3"
+  shared_preferences_android:
+    dependency: transitive
+    description:
+      name: shared_preferences_android
+      sha256: "5bcf0772a761b04f8c6bf814721713de6f3e5d9d89caf8d3fe031b02a342379e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.11"
+  shared_preferences_foundation:
+    dependency: transitive
+    description:
+      name: shared_preferences_foundation
+      sha256: "6a52cfcdaeac77cad8c97b539ff688ccfc458c007b4db12be584fbe5c0e49e03"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.4"
+  shared_preferences_linux:
+    dependency: transitive
+    description:
+      name: shared_preferences_linux
+      sha256: "580abfd40f415611503cae30adf626e6656dfb2f0cee8f465ece7b6defb40f2f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
+  shared_preferences_platform_interface:
+    dependency: transitive
+    description:
+      name: shared_preferences_platform_interface
+      sha256: "57cbf196c486bc2cf1f02b85784932c6094376284b3ad5779d1b1c6c6a816b80"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
+  shared_preferences_web:
+    dependency: transitive
+    description:
+      name: shared_preferences_web
+      sha256: c49bd060261c9a3f0ff445892695d6212ff603ef3115edbb448509d407600019
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.3"
+  shared_preferences_windows:
+    dependency: transitive
+    description:
+      name: shared_preferences_windows
+      sha256: "94ef0f72b2d71bc3e700e025db3710911bd51a71cefb65cc609dd0d9a982e3c1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
+  shelf:
+    dependency: transitive
+    description:
+      name: shelf
+      sha256: e7dd780a7ffb623c57850b33f43309312fc863fb6aa3d276a754bb299839ef12
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.2"
+  shelf_web_socket:
+    dependency: transitive
+    description:
+      name: shelf_web_socket
+      sha256: "3632775c8e90d6c9712f883e633716432a27758216dfb61bd86a8321c0580925"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  shimmer:
+    dependency: "direct main"
+    description:
+      name: shimmer
+      sha256: "5f88c883a22e9f9f299e5ba0e4f7e6054857224976a5d9f839d4ebdc94a14ac9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  sky_engine:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  source_gen:
+    dependency: transitive
+    description:
+      name: source_gen
+      sha256: "35c8150ece9e8c8d263337a265153c3329667640850b9304861faea59fc98f6b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
+  source_span:
+    dependency: transitive
+    description:
+      name: source_span
+      sha256: "53e943d4206a5e30df338fd4c6e7a077e02254531b138a15aec3bd143c1a8b3c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.10.0"
+  stack_trace:
+    dependency: transitive
+    description:
+      name: stack_trace
+      sha256: "9f47fd3630d76be3ab26f0ee06d213679aa425996925ff3feffdec504931c377"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.12.0"
+  storage_client:
+    dependency: transitive
+    description:
+      name: storage_client
+      sha256: "1c61b19ed9e78f37fdd1ca8b729ab8484e6c8fe82e15c87e070b861951183657"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
+  stream_channel:
+    dependency: transitive
+    description:
+      name: stream_channel
+      sha256: ba2aa5d8cc609d96bbb2899c28934f9e1af5cddbd60a827822ea467161eb54e7
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
+  stream_transform:
+    dependency: transitive
+    description:
+      name: stream_transform
+      sha256: ad47125e588cfd37a9a7f86c7d6356dde8dfe89d071d293f80ca9e9273a33871
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  string_scanner:
+    dependency: transitive
+    description:
+      name: string_scanner
+      sha256: "688af5ed3402a4bde5b3a6c15fd768dbf2621a614950b17f04626c431ab3c4c3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.0"
+  supabase:
+    dependency: transitive
+    description:
+      name: supabase
+      sha256: cc039f63a3168386b3a4f338f3bff342c860d415a3578f3fbe854024aee6f911
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.10.2"
+  supabase_flutter:
+    dependency: "direct main"
+    description:
+      name: supabase_flutter
+      sha256: "92b2416ecb6a5c3ed34cf6e382b35ce6cc8921b64f2a9299d5d28968d42b09bb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.12.0"
+  term_glyph:
+    dependency: transitive
+    description:
+      name: term_glyph
+      sha256: a29248a84fbb7c79282b40b8c72a1209db169a2e0542bce341da992fe1bc7e84
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
+  test_api:
+    dependency: transitive
+    description:
+      name: test_api
+      sha256: "664d3a9a64782fcdeb83ce9c6b39e78fd2971d4e37827b9b06c3aa1edc5e760c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.3"
+  timing:
+    dependency: transitive
+    description:
+      name: timing
+      sha256: "62ee18aca144e4a9f29d212f5a4c6a053be252b895ab14b5821996cff4ed90fe"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
+  typed_data:
+    dependency: transitive
+    description:
+      name: typed_data
+      sha256: f9049c039ebfeb4cf7a7104a675823cd72dba8297f264b6637062516699fa006
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.0"
+  unicode:
+    dependency: transitive
+    description:
+      name: unicode
+      sha256: "0f69e46593d65245774d4f17125c6084d2c20b4e473a983f6e21b7d7762218f1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.1"
+  url_launcher:
+    dependency: "direct main"
+    description:
+      name: url_launcher
+      sha256: f6a7e5c4835bb4e3026a04793a4199ca2d14c739ec378fdfe23fc8075d0439f8
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.2"
+  url_launcher_android:
+    dependency: transitive
+    description:
+      name: url_launcher_android
+      sha256: "0aedad096a85b49df2e4725fa32118f9fa580f3b14af7a2d2221896a02cd5656"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.17"
+  url_launcher_ios:
+    dependency: transitive
+    description:
+      name: url_launcher_ios
+      sha256: "7f2022359d4c099eea7df3fdf739f7d3d3b9faf3166fb1dd390775176e0b76cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.3"
+  url_launcher_linux:
+    dependency: transitive
+    description:
+      name: url_launcher_linux
+      sha256: "4e9ba368772369e3e08f231d2301b4ef72b9ff87c31192ef471b380ef29a4935"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.1"
+  url_launcher_macos:
+    dependency: transitive
+    description:
+      name: url_launcher_macos
+      sha256: "17ba2000b847f334f16626a574c702b196723af2a289e7a93ffcb79acff855c2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.2"
+  url_launcher_platform_interface:
+    dependency: transitive
+    description:
+      name: url_launcher_platform_interface
+      sha256: "552f8a1e663569be95a8190206a38187b531910283c3e982193e4f2733f01029"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.2"
+  url_launcher_web:
+    dependency: transitive
+    description:
+      name: url_launcher_web
+      sha256: "4bd2b7b4dc4d4d0b94e5babfffbca8eac1a126c7f3d6ecbc1a11013faa3abba2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
+  url_launcher_windows:
+    dependency: transitive
+    description:
+      name: url_launcher_windows
+      sha256: "3284b6d2ac454cf34f114e1d3319866fdd1e19cdc329999057e44ffe936cfa77"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.4"
+  uuid:
+    dependency: "direct main"
+    description:
+      name: uuid
+      sha256: a11b666489b1954e01d992f3d601b1804a33937b5a8fe677bd26b8a9f96f96e8
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.2"
+  vector_graphics:
+    dependency: transitive
+    description:
+      name: vector_graphics
+      sha256: a4f059dc26fc8295b5921376600a194c4ec7d55e72f2fe4c7d2831e103d461e6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.19"
+  vector_graphics_codec:
+    dependency: transitive
+    description:
+      name: vector_graphics_codec
+      sha256: "99fd9fbd34d9f9a32efd7b6a6aae14125d8237b10403b422a6a6dfeac2806146"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.13"
+  vector_graphics_compiler:
+    dependency: transitive
+    description:
+      name: vector_graphics_compiler
+      sha256: ca81fdfaf62a5ab45d7296614aea108d2c7d0efca8393e96174bf4d51e6725b0
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.18"
+  vector_math:
+    dependency: transitive
+    description:
+      name: vector_math
+      sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.4"
+  vm_service:
+    dependency: transitive
+    description:
+      name: vm_service
+      sha256: f6be3ed8bd01289b34d679c2b62226f63c0e69f9fd2e50a6b3c1c729a961041b
+      url: "https://pub.dev"
+    source: hosted
+    version: "14.3.0"
+  watcher:
+    dependency: transitive
+    description:
+      name: watcher
+      sha256: f52385d4f73589977c80797e60fe51014f7f2b957b5e9a62c3f6ada439889249
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  web:
+    dependency: transitive
+    description:
+      name: web
+      sha256: "868d88a33d8a87b18ffc05f9f030ba328ffefba92d6c127917a2ba740f9cfe4a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
+  web_socket:
+    dependency: transitive
+    description:
+      name: web_socket
+      sha256: "34d64019aa8e36bf9842ac014bb5d2f5586ca73df5e4d9bf5c936975cae6982c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  web_socket_channel:
+    dependency: transitive
+    description:
+      name: web_socket_channel
+      sha256: d645757fb0f4773d602444000a8131ff5d48c9e47adfe9772652dd1a4f2d45c8
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.3"
+  wkt_parser:
+    dependency: transitive
+    description:
+      name: wkt_parser
+      sha256: "8a555fc60de3116c00aad67891bcab20f81a958e4219cc106e3c037aa3937f13"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
+  xdg_directories:
+    dependency: transitive
+    description:
+      name: xdg_directories
+      sha256: "7a3f37b05d989967cdddcbb571f1ea834867ae2faa29725fd085180e0883aa15"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
+  xml:
+    dependency: transitive
+    description:
+      name: xml
+      sha256: b015a8ad1c488f66851d762d3090a21c600e479dc75e68328c52774040cf9226
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.5.0"
+  yaml:
+    dependency: transitive
+    description:
+      name: yaml
+      sha256: b9da305ac7c39faa3f030eccd175340f968459dae4af175130b3fc47e40d76ce
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.3"
+  yet_another_json_isolate:
+    dependency: transitive
+    description:
+      name: yet_another_json_isolate
+      sha256: fe45897501fa156ccefbfb9359c9462ce5dec092f05e8a56109db30be864f01e
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+sdks:
+  dart: ">=3.6.2 <4.0.0"
+  flutter: ">=3.27.0"
+</file>
+
+<file path="pubspec.yaml">
+name: prueba_bim2
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.2
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+
+  # --- ARQUITECTURA & GESTIÓN DE ESTADO ---
+  flutter_bloc: ^8.1.6
+  get_it: ^7.7.0
+  equatable: ^2.0.5
+  go_router: ^14.2.0
+  injectable: ^2.5.0
+
+  # --- BACKEND (SUPABASE) ---
+  supabase_flutter: ^2.6.0
+
+  # Environment Variables
+  flutter_dotenv: ^5.2.1
+
+
+  # Functional Programming
+  dartz: ^0.10.1
+
+  # Network
+  connectivity_plus: ^6.1.2
+
+  # Deep Linking
+  app_links: ^6.3.3
+
+  # --- MAPAS & GPS (OPENSTREETMAP) ---
+  flutter_map: ^7.0.0
+  latlong2: ^0.9.1
+  geolocator: ^13.0.0
+  geocoding: ^3.0.0 # Para direcciones
+
+  # --- INTELIGENCIA ARTIFICIAL (GEMINI) ---
+  google_generative_ai: ^0.4.4
+
+  # --- UTILIDADES & UI ---
+  image_picker: ^1.1.2 # Para subir fotos de mascotas
+  google_fonts: ^6.2.1 # Para diseño moderno (+ puntos)
+  intl: ^0.19.0 # Para fechas
+  url_launcher: ^6.3.0 # Para abrir links externos si hace falta
+  uuid: ^4.4.0 # Para generar nombres únicos de imágenes
+  flutter_svg: ^2.0.10+1
+  shimmer: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^5.0.0
+
+  # Code Generation
+  build_runner: ^2.4.13
+  injectable_generator: ^2.6.2
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - .env
+    - assets/images/
+    - assets/icons/
+
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/to/asset-from-package
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package
+</file>
+
+<file path="README.md">
+# prueba_bim2
+
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+</file>
+
+<file path="vercel/.gitignore">
+.vercel
+.env*.local
+</file>
+
+<file path="vercel/api/config.js">
+// Vercel Serverless Function para exponer variables de entorno
+export default function handler(req, res) {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
+  // Retornar solo las variables públicas 
+  res.status(200).json({
+    supabaseUrl: process.env.SUPABASE_URL,
+    supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
+  });
+}
+</file>
+
+<file path="vercel/package.json">
+{
+  "name": "login-pro-vercel",
+  "version": "1.0.0",
+  "description": "Vercel pages for email verification and password reset",
+  "scripts": {
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
+</file>
+
+<file path="vercel/public/reset-password.html">
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restablecer Contraseña - Login Pro</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        border-radius: 20px;
+        padding: 48px;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 24px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .icon svg {
+        width: 40px;
+        height: 40px;
+        fill: white;
+      }
+
+      .icon.success {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      }
+
+      h1 {
+        color: #2d3436;
+        font-size: 28px;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+
+      p {
+        color: #636e72;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 32px;
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 24px;
+      }
+
+      label {
+        display: block;
+        color: #2d3436;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      input {
+        width: 100%;
+        padding: 16px 20px;
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #f5576c;
+      }
+
+      input.error {
+        border-color: #ff6b6b;
+      }
+
+      .password-requirements {
+        margin-top: 12px;
+        padding: 16px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .requirement {
+        display: flex;
+        align-items: center;
+        color: #636e72;
+        margin-bottom: 8px;
+      }
+
+      .requirement:last-child {
+        margin-bottom: 0;
+      }
+
+      .requirement.valid {
+        color: #00b894;
+      }
+
+      .requirement svg {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        fill: currentColor;
+      }
+
+      .button {
+        width: 100%;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        border: none;
+        padding: 16px 32px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(245, 87, 108, 0.3);
+      }
+
+      .button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .loader {
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .error-message {
+        color: #ff6b6b;
+        font-size: 14px;
+        margin-top: 8px;
+        text-align: left;
+      }
+
+      .loading-state {
+        text-align: center;
+      }
+
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #f5576c;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Loading State -->
+      <div id="loading-state" class="loading-state">
+        <div class="loading-spinner"></div>
+        <h1>Verificando enlace...</h1>
+        <p>Por favor espera mientras verificamos tu enlace de recuperación.</p>
+      </div>
+
+      <!-- Form State -->
+      <div id="form-state" class="hidden">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"
+            />
+          </svg>
+        </div>
+        <h1>Nueva Contraseña</h1>
+        <p>Ingresa tu nueva contraseña para tu cuenta de Login Pro.</p>
+
+        <form id="reset-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="password">Nueva Contraseña</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Ingresa tu nueva contraseña"
+              oninput="validatePassword()"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Confirmar Contraseña</label>
+            <input
+              type="password"
+              id="confirm-password"
+              placeholder="Confirma tu nueva contraseña"
+              oninput="validatePassword()"
+              required
+            />
+            <div id="password-error" class="error-message hidden"></div>
+          </div>
+
+          <div class="password-requirements">
+            <div class="requirement" id="req-length">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                />
+              </svg>
+              Mínimo 6 caracteres
+            </div>
+            <div class="requirement" id="req-match">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                />
+              </svg>
+              Las contraseñas coinciden
+            </div>
+          </div>
+
+          <button type="submit" class="button" id="submit-btn" disabled>
+            Cambiar Contraseña
+          </button>
+        </form>
+      </div>
+
+      <!-- Success State -->
+      <div id="success-state" class="hidden">
+        <div class="icon success">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+            />
+          </svg>
+        </div>
+        <h1>¡Contraseña actualizada!</h1>
+        <p>
+          Tu contraseña ha sido cambiada correctamente. Ahora serás redirigido a
+          la aplicación.
+        </p>
+        <button class="button" onclick="openApp()">Abrir Aplicación</button>
+      </div>
+
+      <!-- Error State -->
+      <div id="error-state" class="hidden">
+        <div
+          class="icon"
+          style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)"
+        >
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+            />
+          </svg>
+        </div>
+        <h1>Error</h1>
+        <p id="error-message">
+          El enlace de recuperación es inválido o ha expirado. Por favor
+          solicita un nuevo enlace.
+        </p>
+        <button class="button" onclick="openApp()">Ir a la Aplicación</button>
+      </div>
+    </div>
+
+    <script>
+      console.log("Script iniciado");
+      console.log("window.supabase disponible:", typeof window.supabase);
+
+      // Configurar Supabase - Las credenciales se cargan desde variables de entorno
+      // Para desarrollo local, crea un archivo .env en la carpeta vercel/
+      // Para producción, configura las variables en Vercel Dashboard
+      let supabase;
+
+      // Función para inicializar Supabase
+      async function initSupabase() {
+        try {
+          // En producción, Vercel inyectará estas variables
+          // En desarrollo, usa las del archivo .env local o configura en Vercel CLI
+          const response = await fetch('/api/config');
+          const config = await response.json();
+
+          const SUPABASE_URL = config.supabaseUrl;
+          const SUPABASE_ANON_KEY = config.supabaseAnonKey;
+
+          // Esperar a que el SDK de Supabase esté cargado
+          if (!window.supabase) {
+            console.error("ERROR: SDK de Supabase no está cargado");
+            alert(
+              "Error: No se pudo cargar el SDK de Supabase. Por favor recarga la página."
+            );
+            return;
+          }
+
+          supabase = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+          );
+          console.log("Cliente de Supabase creado:", supabase);
+
+          // Iniciar la aplicación después de que Supabase esté listo
+          initApp();
+        } catch (error) {
+          console.error("Error al cargar configuración:", error);
+          alert("Error al cargar la configuración. Por favor recarga la página.");
+        }
+      }
+
+      // Validar contraseña (debe estar en scope global para ser accesible desde HTML)
+      function validatePassword() {
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
+        const errorDiv = document.getElementById("password-error");
+        const submitBtn = document.getElementById("submit-btn");
+
+        console.log("Validando contraseña:", {
+          passwordLength: password.length,
+          confirmPasswordLength: confirmPassword.length,
+          match: password === confirmPassword
+        });
+
+        // Validar longitud
+        const lengthReq = document.getElementById("req-length");
+        if (password.length >= 6) {
+          lengthReq.classList.add("valid");
+        } else {
+          lengthReq.classList.remove("valid");
+        }
+
+        // Validar coincidencia
+        const matchReq = document.getElementById("req-match");
+        if (password && confirmPassword && password === confirmPassword) {
+          matchReq.classList.add("valid");
+          errorDiv.classList.add("hidden");
+          document.getElementById("confirm-password").classList.remove("error");
+        } else if (confirmPassword) {
+          matchReq.classList.remove("valid");
+          errorDiv.textContent = "Las contraseñas no coinciden";
+          errorDiv.classList.remove("hidden");
+          document.getElementById("confirm-password").classList.add("error");
+        } else {
+          // Si no hay confirmPassword aún, limpiar el error
+          matchReq.classList.remove("valid");
+          errorDiv.classList.add("hidden");
+          document.getElementById("confirm-password").classList.remove("error");
+        }
+
+        // Habilitar/deshabilitar botón
+        const isValid = password.length >= 6 && confirmPassword.length > 0 && password === confirmPassword;
+        submitBtn.disabled = !isValid;
+        console.log("Botón habilitado:", !isValid);
+      }
+
+      // Manejar envío del formulario (debe estar en scope global para ser accesible desde HTML)
+      async function handleSubmit(event) {
+        event.preventDefault();
+
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
+        const submitBtn = document.getElementById("submit-btn");
+
+        if (password !== confirmPassword) {
+          showError("Las contraseñas no coinciden");
+          return;
+        }
+
+        if (password.length < 6) {
+          showError("La contraseña debe tener al menos 6 caracteres");
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<div class="loader"></div>Actualizando...';
+
+        try {
+          // Verificar que tengamos una sesión activa antes de actualizar
+          const {
+            data: { session },
+          } = await supabase.auth.getSession();
+          console.log("Sesión actual:", session);
+
+          if (!session) {
+            throw new Error(
+              "No hay sesión activa. Por favor recarga la página."
+            );
+          }
+
+          // Actualizar la contraseña
+          const { data, error } = await supabase.auth.updateUser({
+            password: password,
+          });
+
+          console.log("Resultado de actualización:", { data, error });
+
+          if (error) throw error;
+
+          // Mostrar éxito
+          document.getElementById("form-state").classList.add("hidden");
+          document.getElementById("success-state").classList.remove("hidden");
+
+          // Redirigir automáticamente después de 3 segundos
+          setTimeout(() => {
+            openApp();
+          }, 3000);
+        } catch (error) {
+          console.error("Error completo:", error);
+          showError("Error al actualizar la contraseña: " + error.message);
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Cambiar Contraseña";
+        }
+      }
+
+      // Abrir app (debe estar en scope global)
+      function openApp() {
+        // Intentar obtener tokens del hash primero, luego de query params
+        const hashParams = new URLSearchParams(
+          window.location.hash.substring(1)
+        );
+        const queryParams = new URLSearchParams(window.location.search);
+
+        const accessToken =
+          hashParams.get("access_token") || queryParams.get("access_token");
+        const refreshToken =
+          hashParams.get("refresh_token") || queryParams.get("refresh_token");
+
+        let deepLink = "loginpro://password-reset-success";
+
+        if (accessToken) {
+          deepLink += `?access_token=${encodeURIComponent(accessToken)}`;
+          if (refreshToken) {
+            deepLink += `&refresh_token=${encodeURIComponent(refreshToken)}`;
+          }
+        }
+
+        window.location.href = deepLink;
+
+        setTimeout(() => {
+          alert(
+            "Si la aplicación no se abre automáticamente, ábrela manualmente."
+          );
+        }, 2000);
+      }
+
+      // Mostrar error (debe estar en scope global)
+      function showError(message) {
+        document.getElementById("loading-state").classList.add("hidden");
+        document.getElementById("form-state").classList.add("hidden");
+        document.getElementById("error-message").textContent = message;
+        document.getElementById("error-state").classList.remove("hidden");
+      }
+
+      // Función principal de la aplicación
+      function initApp() {
+        // Verificar y establecer sesión al cargar
+        async function checkSession() {
+          try {
+          console.log("URL completa:", window.location.href);
+          console.log("Hash:", window.location.hash);
+          console.log("Search:", window.location.search);
+
+          const hashParams = new URLSearchParams(
+            window.location.hash.substring(1)
+          );
+          const queryParams = new URLSearchParams(window.location.search);
+
+          // Obtener tokens del hash (flujo implícito)
+          const accessToken = hashParams.get("access_token");
+          const refreshToken = hashParams.get("refresh_token");
+
+          // Obtener token PKCE de query params
+          const token = queryParams.get("token");
+          const type = queryParams.get("type") || hashParams.get("type");
+
+          console.log("Tokens encontrados:", {
+            accessToken: !!accessToken,
+            token: !!token,
+            type,
+          });
+
+          // CASO 1: Token PKCE (token=pkce_xxx en query params)
+          if (token && type === "recovery") {
+            console.log("Verificando token PKCE de recuperación...");
+            const { data, error } = await supabase.auth.verifyOtp({
+              token_hash: token,
+              type: "recovery",
+            });
+
+            console.log("Resultado verifyOtp:", { data, error });
+
+            if (error) throw error;
+
+            if (data.session) {
+              console.log("Sesión establecida con token PKCE");
+              document.getElementById("loading-state").classList.add("hidden");
+              document.getElementById("form-state").classList.remove("hidden");
+              // Focus en el campo de contraseña para mejor UX
+              setTimeout(() => document.getElementById("password").focus(), 100);
+              return;
+            }
+          }
+
+          // CASO 2: Tokens en hash (flujo implícito antiguo)
+          if (accessToken) {
+            console.log("Estableciendo sesión con tokens del hash...");
+            const { data, error } = await supabase.auth.setSession({
+              access_token: accessToken,
+              refresh_token: refreshToken,
+            });
+
+            if (error) throw error;
+
+            if (data.session) {
+              console.log("Sesión establecida con tokens del hash");
+              document.getElementById("loading-state").classList.add("hidden");
+              document.getElementById("form-state").classList.remove("hidden");
+              // Focus en el campo de contraseña para mejor UX
+              setTimeout(() => document.getElementById("password").focus(), 100);
+              return;
+            }
+          }
+
+          // CASO 3: Verificar sesión existente
+          console.log("Verificando sesión existente...");
+          const {
+            data: { session },
+            error,
+          } = await supabase.auth.getSession();
+
+          if (session) {
+            console.log("Sesión existente encontrada");
+            document.getElementById("loading-state").classList.add("hidden");
+            document.getElementById("form-state").classList.remove("hidden");
+            // Focus en el campo de contraseña para mejor UX
+            setTimeout(() => document.getElementById("password").focus(), 100);
+            return;
+          }
+
+          // No hay sesión válida
+          console.log("No se encontró sesión válida");
+          showError(
+            "El enlace de recuperación es inválido o ha expirado. Por favor solicita un nuevo enlace."
+          );
+        } catch (error) {
+          console.error("Error al verificar sesión:", error);
+          showError("Error al verificar el enlace: " + error.message);
+          }
+        }
+
+        // Ejecutar cuando el DOM esté listo
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", checkSession);
+        } else {
+          // DOM ya está listo
+          checkSession();
+        }
+      } // Cierre de initApp()
+
+      // Inicializar Supabase cuando se cargue la página
+      initSupabase();
+    </script>
+  </body>
+</html>
+</file>
+
+<file path="vercel/public/verify-email.html">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Email - Login Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 48px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: #f0f4ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon.success {
+            background: #d1f4e0;
+        }
+
+        .icon.error {
+            background: #ffe0e0;
+        }
+
+        .icon svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        h1 {
+            color: #2d3436;
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        p {
+            color: #636e72;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .button {
+            background: #6C5CE7;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s ease;
+        }
+
+        .button:hover {
+            background: #5f4fd1;
+        }
+
+        .button:disabled {
+            background: #b2bec3;
+            cursor: not-allowed;
+        }
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #6C5CE7;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="loading" class="loading-state">
+            <div class="icon">
+                <div class="loader"></div>
+            </div>
+            <h1>Verificando tu email...</h1>
+            <p>Por favor espera mientras confirmamos tu cuenta.</p>
+        </div>
+
+        <div id="success" class="hidden">
+            <div class="icon success">
+                <svg fill="#00D2A1" viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+            </div>
+            <h1>¡Email verificado!</h1>
+            <p>Tu cuenta ha sido verificada correctamente. Ya puedes iniciar sesión en la aplicación.</p>
+            <button class="button" onclick="openApp()">Abrir aplicación</button>
+        </div>
+
+        <div id="error" class="hidden">
+            <div class="icon error">
+                <svg fill="#FF6B6B" viewBox="0 0 24 24">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                </svg>
+            </div>
+            <h1>Error en la verificación</h1>
+            <p id="error-message">Hubo un problema al verificar tu email. El enlace puede haber expirado.</p>
+            <button class="button" onclick="openApp()">Ir a la aplicación</button>
+        </div>
+    </div>
+
+    <script>
+        async function verifyEmail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            const type = urlParams.get('type');
+
+            if (!token || type !== 'signup') {
+                showError('Enlace de verificación inválido');
+                return;
+            }
+
+            try {
+                // Supabase maneja la verificación automáticamente
+                // Redirige al deep link de la app
+                setTimeout(() => {
+                    showSuccess();
+                }, 1500);
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+
+        function showSuccess() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('success').classList.remove('hidden');
+        }
+
+        function showError(message) {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error-message').textContent = message;
+            document.getElementById('error').classList.remove('hidden');
+        }
+
+        function openApp() {
+            // Deep link a la aplicación
+            window.location.href = 'loginpro://verified';
+            // Fallback después de 2 segundos
+            setTimeout(() => {
+                alert('Por favor abre la aplicación Login Pro manualmente.');
+            }, 2000);
+        }
+
+        // Ejecutar verificación al cargar
+        verifyEmail();
+    </script>
+</body>
+</html>
+</file>
+
+<file path="vercel/vercel.json">
+{
+  "rewrites": [
+    { "source": "/verify-email", "destination": "/verify-email.html" },
+    { "source": "/reset-password", "destination": "/reset-password.html" }
+  ]
+}
+</file>
+
+<file path="android/gradle/wrapper/gradle-wrapper.properties">
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.2-all.zip
+</file>
+
+<file path="android/settings.gradle">
+pluginManagement {
+    def flutterSdkPath = {
+        def properties = new Properties()
+        file("local.properties").withInputStream { properties.load(it) }
+        def flutterSdkPath = properties.getProperty("flutter.sdk")
+        assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
+        return flutterSdkPath
+    }()
+
+    includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
+
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    id "dev.flutter.flutter-plugin-loader" version "1.0.0"
+    id "com.android.application" version "8.2.1" apply false
+    id "org.jetbrains.kotlin.android" version "1.9.0" apply false
+}
+
+include ":app"
+</file>
+
+</files>

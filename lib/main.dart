@@ -11,10 +11,7 @@ import 'injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Load environment variables
   await dotenv.load(fileName: '.env');
-
   await configureDependencies();
   runApp(const MyApp());
 }
@@ -27,20 +24,30 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt<AuthBloc>()..add(const AuthCheckRequested()),
       child: MaterialApp(
-        title: 'Login Pro',
+        title: 'PetAdopt', // Cambiado nombre a PetAdopt
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         home: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            if (state is AuthLoading || state is AuthInitial) {
+            // CORRECCIÓN CLAVE AQUÍ:
+            // Solo mostramos el spinner global si estamos en el estado INICIAL puro.
+            // Si es 'AuthLoading', dejamos que LoginPage o WelcomePage manejen su propio loading.
+            if (state is AuthInitial) {
               return const Scaffold(
                 body: Center(
                   child: CircularProgressIndicator(),
                 ),
               );
-            } else if (state is AuthAuthenticated) {
+            }
+
+            // Si el usuario está autenticado, vamos al Home/Welcome
+            else if (state is AuthAuthenticated) {
               return WelcomePage(user: state.user);
-            } else {
+            }
+
+            // Para cualquier otro estado (Unauthenticated, Loading, Error),
+            // mostramos el Login. El Login ya tiene su propio LoadingOverlay.
+            else {
               return const LoginPage();
             }
           },

@@ -12,6 +12,7 @@ abstract class AuthRemoteDataSource {
     required String email,
     required String password,
     String? displayName,
+    String? role,
   });
 
   Future<void> sendPasswordResetEmail({
@@ -48,9 +49,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       return UserModel.fromSupabaseUser(response.user!);
     } on AuthException catch (e) {
-      throw Exception(e.message);
+      // Interceptamos el error de Supabase y lo traducimos
+      throw Exception(_mapSupabaseError(e));
     } catch (e) {
-      throw Exception('Error al iniciar sesión: $e');
+      throw Exception('Ocurrió un error inesperado al iniciar sesión.');
     }
   }
 
@@ -59,13 +61,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String email,
     required String password,
     String? displayName,
+    String? role,
   }) async {
     try {
       final response = await supabaseClient.auth.signUp(
         email: email,
         password: password,
-        data: displayName != null ? {'display_name': displayName} : null,
+        data: {
+          if (displayName != null) 'display_name': displayName,
+          'role': role ?? 'adopter',
+        },
       );
+
+      // Si hay usuario pero no sesión, es que falta confirmar el correo
+      if (response.user != null && response.session == null) {
+        return UserModel.fromSupabaseUser(response.user!);
+      }
 
       if (response.user == null) {
         throw Exception('No se pudo crear la cuenta');
@@ -73,9 +84,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       return UserModel.fromSupabaseUser(response.user!);
     } on AuthException catch (e) {
-      throw Exception(e.message);
+      throw Exception(_mapSupabaseError(e));
     } catch (e) {
-      throw Exception('Error al registrarse: $e');
+      throw Exception('Error al registrarse. Intenta de nuevo.');
     }
   }
 
@@ -84,11 +95,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String email,
   }) async {
     try {
-      await supabaseClient.auth.resetPasswordForEmail(email);
+      await supabaseClient.auth.resetPasswordForEmail(
+        email,
+        // Asegúrate que este link coincida con el intent-filter en AndroidManifest
+        redirectTo: 'loginpro://reset-callback',
+      );
     } on AuthException catch (e) {
-      throw Exception(e.message);
+      throw Exception(_mapSupabaseError(e));
     } catch (e) {
-      throw Exception('Error al enviar email de recuperación: $e');
+      throw Exception('Error al enviar email de recuperación.');
     }
   }
 
@@ -97,9 +112,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       await supabaseClient.auth.signOut();
     } on AuthException catch (e) {
-      throw Exception(e.message);
+      throw Exception(e.message); // En signOut rara vez hay error crítico
     } catch (e) {
-      throw Exception('Error al cerrar sesión: $e');
+      throw Exception('Error al cerrar sesión.');
     }
   }
 
@@ -110,7 +125,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (user == null) return null;
       return UserModel.fromSupabaseUser(user);
     } catch (e) {
-      throw Exception('Error al obtener usuario actual: $e');
+      return null;
     }
   }
 
@@ -121,5 +136,44 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (user == null) return null;
       return UserModel.fromSupabaseUser(user);
     });
+  }
+
+  // --- TRADUCTOR DE ERRORES ---
+  String _mapSupabaseError(AuthException error) {
+    final msg = error.message.toLowerCase();
+
+    // Credenciales incorrectas (Login)
+    if (msg.contains('invalid login credentials')) {
+      return 'Correo o contraseña incorrectos.';
+    }
+
+    // Correo no confirmado (Login)
+    if (msg.contains('email not confirmed')) {
+      return 'Debes confirmar tu correo electrónico antes de entrar.';
+    }
+
+    // Usuario no encontrado (A veces Supabase usa esto en lugar de invalid credentials)
+    if (msg.contains('user not found')) {
+      return 'No existe una cuenta con este correo.';
+    }
+
+    // Contraseña muy débil (Registro)
+    if (msg.contains('password should be')) {
+      return 'La contraseña es muy débil (mínimo 6 caracteres).';
+    }
+
+    // Correo ya registrado (Registro)
+    if (msg.contains('already registered') ||
+        msg.contains('user already exists')) {
+      return 'Este correo ya está registrado.';
+    }
+
+    // Demasiados intentos (Seguridad)
+    if (msg.contains('rate limit') || msg.contains('too many requests')) {
+      return 'Demasiados intentos. Espera unos minutos.';
+    }
+
+    // Retorno por defecto si es otro error
+    return error.message;
   }
 }

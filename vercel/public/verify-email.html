@@ -1,193 +1,215 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Email - Login Pro</title>
+    <title>Verificación PetAdopt</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 20px;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #FF8B3D 0%, #FFB74D 100%);
+            margin: 0;
         }
 
-        .container {
+        .card {
             background: white;
+            padding: 2.5rem;
             border-radius: 20px;
-            padding: 48px;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             text-align: center;
-        }
-
-        .icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 24px;
-            background: #f0f4ff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .icon.success {
-            background: #d1f4e0;
-        }
-
-        .icon.error {
-            background: #ffe0e0;
-        }
-
-        .icon svg {
-            width: 48px;
-            height: 48px;
-        }
-
-        h1 {
-            color: #2d3436;
-            font-size: 28px;
-            margin-bottom: 16px;
-        }
-
-        p {
-            color: #636e72;
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-
-        .button {
-            background: #6C5CE7;
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.3s ease;
-        }
-
-        .button:hover {
-            background: #5f4fd1;
-        }
-
-        .button:disabled {
-            background: #b2bec3;
-            cursor: not-allowed;
+            max-width: 450px;
+            width: 90%;
         }
 
         .loader {
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #6C5CE7;
+            border-top: 4px solid #FF8B3D;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
-            margin: 0 auto;
+            margin: 0 auto 1.5rem;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .hidden {
             display: none;
         }
+
+        h1 {
+            color: #2D3436;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #636E72;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        button {
+            background: #FF8B3D;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 139, 61, 0.3);
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: #FFF3E0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon svg {
+            width: 40px;
+            height: 40px;
+        }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div id="loading" class="loading-state">
-            <div class="icon">
-                <div class="loader"></div>
-            </div>
-            <h1>Verificando tu email...</h1>
-            <p>Por favor espera mientras confirmamos tu cuenta.</p>
+    <div class="card">
+        <div id="loading">
+            <div class="loader"></div>
+            <h1>Verificando...</h1>
+            <p>Estamos confirmando tu cuenta con el servidor.</p>
         </div>
 
         <div id="success" class="hidden">
-            <div class="icon success">
-                <svg fill="#00D2A1" viewBox="0 0 24 24">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            <div class="icon" style="background: #E0F2F1;">
+                <svg fill="#00BFA5" viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                 </svg>
             </div>
-            <h1>¡Email verificado!</h1>
-            <p>Tu cuenta ha sido verificada correctamente. Ya puedes iniciar sesión en la aplicación.</p>
-            <button class="button" onclick="openApp()">Abrir aplicación</button>
+            <h1 style="color: #2D3436">¡Cuenta Activada!</h1>
+            <p>Tu correo ha sido confirmado correctamente. Ya puedes iniciar sesión en la app.</p>
+            <button onclick="openApp()">Abrir App</button>
         </div>
 
         <div id="error" class="hidden">
-            <div class="icon error">
+            <div class="icon" style="background: #FFEBEE;">
                 <svg fill="#FF6B6B" viewBox="0 0 24 24">
-                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                    <path
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
                 </svg>
             </div>
-            <h1>Error en la verificación</h1>
-            <p id="error-message">Hubo un problema al verificar tu email. El enlace puede haber expirado.</p>
-            <button class="button" onclick="openApp()">Ir a la aplicación</button>
+            <h1 style="color: #2D3436">Algo salió mal</h1>
+            <p id="error-msg">El enlace es inválido o ha expirado.</p>
         </div>
     </div>
 
     <script>
-        async function verifyEmail() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const token = urlParams.get('token');
-            const type = urlParams.get('type');
+        // Variable global para el cliente
+        let supabase;
 
-            if (!token || type !== 'signup') {
-                showError('Enlace de verificación inválido');
-                return;
-            }
-
+        // 1. Función inicial que carga la configuración
+        async function initSupabase() {
             try {
-                // Supabase maneja la verificación automáticamente
-                // Redirige al deep link de la app
-                setTimeout(() => {
-                    showSuccess();
-                }, 1500);
+                // Pedimos las credenciales a nuestra API en Vercel
+                // Esto evita tener las claves escritas en el código HTML
+                const response = await fetch('/api/config');
+                const config = await response.json();
+
+                if (!window.supabase) {
+                    throw new Error("No se pudo cargar la librería de Supabase.");
+                }
+
+                // Inicializamos el cliente con las claves obtenidas
+                supabase = window.supabase.createClient(
+                    config.supabaseUrl,
+                    config.supabaseAnonKey
+                );
+
+                console.log("Supabase inicializado correctamente");
+
+                // Una vez inicializado, ejecutamos la verificación
+                verifyEmail();
+
             } catch (error) {
-                showError(error.message);
+                console.error("Error de configuración:", error);
+                showError("Error interno al conectar con el servidor.");
             }
         }
 
-        function showSuccess() {
-            document.getElementById('loading').classList.add('hidden');
-            document.getElementById('success').classList.remove('hidden');
+        // 2. Función que verifica el token
+        async function verifyEmail() {
+            try {
+                // Obtener token de la URL (hash o query params)
+                const params = new URLSearchParams(window.location.search);
+                const tokenHash = params.get('token_hash') || params.get('token');
+                const type = params.get('type') || 'signup';
+
+                if (!tokenHash) throw new Error("No se encontró el token de verificación.");
+
+                console.log("Verificando token...", type);
+
+                // Llamada real a Supabase usando el cliente inicializado
+                const { error } = await supabase.auth.verifyOtp({
+                    token_hash: tokenHash,
+                    type: type,
+                });
+
+                if (error) throw error;
+
+                // Éxito
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('success').classList.remove('hidden');
+
+                // Intento automático de abrir la app
+                setTimeout(openApp, 1500);
+
+            } catch (e) {
+                console.error(e);
+                showError(e.message || "Enlace inválido o expirado");
+            }
         }
 
-        function showError(message) {
+        function showError(msg) {
             document.getElementById('loading').classList.add('hidden');
-            document.getElementById('error-message').textContent = message;
             document.getElementById('error').classList.remove('hidden');
+            document.getElementById('error-msg').innerText = msg;
         }
 
         function openApp() {
-            // Deep link a la aplicación
+            // Deep Link a la app Flutter
             window.location.href = 'loginpro://verified';
-            // Fallback después de 2 segundos
-            setTimeout(() => {
-                alert('Por favor abre la aplicación Login Pro manualmente.');
-            }, 2000);
         }
 
-        // Ejecutar verificación al cargar
-        verifyEmail();
+        // Arrancamos el proceso
+        initSupabase();
     </script>
 </body>
+
 </html>

@@ -21,18 +21,27 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    if (!await networkInfo.isConnected) {
-      return const Left(NetworkFailure('Sin conexión a internet'));
-    }
+    print('🟡 REPO: Iniciando login para $email'); // DEBUG
+
+    // 1. Desactivamos temporalmente el check de internet para probar si es el culpable
+    // if (!await networkInfo.isConnected) {
+    //   print('🔴 REPO: Sin internet');
+    //   return const Left(NetworkFailure('Sin conexión a internet'));
+    // }
 
     try {
+      print('🟡 REPO: Llamando a Supabase DataSource...');
       final user = await remoteDataSource.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      print('🟢 REPO: Login exitoso!');
       return Right(user);
     } catch (e) {
-      return Left(AuthFailure(e.toString()));
+      print('🔴 REPO: Error capturado -> $e'); // DEBUG CRÍTICO
+      // Limpiamos el mensaje de error para que se vea bonito en el SnackBar
+      final cleanMessage = e.toString().replaceAll('Exception: ', '');
+      return Left(AuthFailure(cleanMessage));
     }
   }
 
@@ -41,20 +50,24 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
     String? displayName,
+    String? role,
   }) async {
-    if (!await networkInfo.isConnected) {
-      return const Left(NetworkFailure('Sin conexión a internet'));
-    }
+    print('🟡 REPO: Iniciando registro');
+    // if (!await networkInfo.isConnected) {
+    //   return const Left(NetworkFailure('Sin conexión a internet'));
+    // }
 
     try {
       final user = await remoteDataSource.signUpWithEmailAndPassword(
         email: email,
         password: password,
         displayName: displayName,
+        role: role,
       );
       return Right(user);
     } catch (e) {
-      return Left(AuthFailure(e.toString()));
+      final cleanMessage = e.toString().replaceAll('Exception: ', '');
+      return Left(AuthFailure(cleanMessage));
     }
   }
 
@@ -62,15 +75,11 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, void>> sendPasswordResetEmail({
     required String email,
   }) async {
-    if (!await networkInfo.isConnected) {
-      return const Left(NetworkFailure('Sin conexión a internet'));
-    }
-
     try {
       await remoteDataSource.sendPasswordResetEmail(email: email);
       return const Right(null);
     } catch (e) {
-      return Left(AuthFailure(e.toString()));
+      return Left(AuthFailure(e.toString().replaceAll('Exception: ', '')));
     }
   }
 
@@ -80,7 +89,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await remoteDataSource.signOut();
       return const Right(null);
     } catch (e) {
-      return Left(AuthFailure(e.toString()));
+      return Left(AuthFailure(e.toString().replaceAll('Exception: ', '')));
     }
   }
 
@@ -90,7 +99,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = await remoteDataSource.getCurrentUser();
       return Right(user);
     } catch (e) {
-      return Left(AuthFailure(e.toString()));
+      return Left(AuthFailure(e.toString().replaceAll('Exception: ', '')));
     }
   }
 

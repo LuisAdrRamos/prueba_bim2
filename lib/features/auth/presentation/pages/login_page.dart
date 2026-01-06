@@ -29,6 +29,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleSignIn() {
+    // 1. Ocultar el teclado para ver bien el SnackBar y el Loading
+    FocusScope.of(context).unfocus();
+
     if (_formKey.currentState!.validate()) {
       context.read<AuthBloc>().add(
             SignInRequested(

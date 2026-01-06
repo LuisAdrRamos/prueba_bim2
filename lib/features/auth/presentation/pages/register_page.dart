@@ -6,7 +6,6 @@ import '../bloc/auth_state.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/loading_overlay.dart';
 import 'email_verification_sent_page.dart';
-import 'welcome_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -20,16 +19,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
 
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
-  }
+  // Estado para el rol seleccionado
+  String _selectedRole = 'adopter'; // 'adopter' o 'shelter'
 
   void _handleSignUp() {
     if (_formKey.currentState!.validate()) {
@@ -38,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
               email: _emailController.text.trim(),
               password: _passwordController.text,
               displayName: _nameController.text.trim(),
+              role: _selectedRole, // Enviamos el rol seleccionado
             ),
           );
     }
@@ -46,173 +39,159 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(state.message),
-                backgroundColor: Theme.of(context).colorScheme.error,
-              ),
+                  content: Text(state.message), backgroundColor: Colors.red),
             );
           } else if (state is EmailVerificationRequired) {
-            // Mostrar pantalla de verificación de email
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (_) => EmailVerificationSentPage(email: state.email),
-              ),
-            );
-          } else if (state is AuthAuthenticated) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (_) => WelcomePage(user: state.user),
-              ),
+                  builder: (_) =>
+                      EmailVerificationSentPage(email: state.email)),
             );
           }
         },
         builder: (context, state) {
-          final isLoading = state is AuthLoading;
-
           return LoadingOverlay(
-            isLoading: isLoading,
+            isLoading: state is AuthLoading,
             child: SafeArea(
-              child: Center(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // Back button
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: IconButton(
-                            icon: const Icon(Icons.arrow_back),
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(24.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text('¿Quién eres?',
+                          style: Theme.of(context).textTheme.displayMedium),
+                      const SizedBox(height: 8),
+                      const Text(
+                          'Selecciona el tipo de cuenta que deseas crear'),
+                      const SizedBox(height: 24),
 
-                        // Logo o icono
-                        Icon(
-                          Icons.person_add_rounded,
-                          size: 80,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        const SizedBox(height: 24),
+                      // SELECCIÓN DE ROL (Tarjetas)
+                      Row(
+                        children: [
+                          Expanded(
+                              child: _RoleCard(
+                            title: 'Adoptante',
+                            icon: Icons.home_rounded,
+                            isSelected: _selectedRole == 'adopter',
+                            onTap: () =>
+                                setState(() => _selectedRole = 'adopter'),
+                            color: const Color(0xFFFF8B3D),
+                          )),
+                          const SizedBox(width: 16),
+                          Expanded(
+                              child: _RoleCard(
+                            title: 'Refugio',
+                            icon: Icons.pets_rounded,
+                            isSelected: _selectedRole == 'shelter',
+                            onTap: () =>
+                                setState(() => _selectedRole = 'shelter'),
+                            color: const Color(0xFF00BFA5),
+                          )),
+                        ],
+                      ),
+                      const SizedBox(height: 32),
 
-                        // Título
-                        Text(
-                          'Crear cuenta',
-                          style: Theme.of(context).textTheme.displayMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Regístrate para comenzar',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 48),
+                      CustomTextField(
+                        controller: _nameController,
+                        label: _selectedRole == 'shelter'
+                            ? 'Nombre del Refugio'
+                            : 'Nombre Completo',
+                        hint: _selectedRole == 'shelter'
+                            ? 'Refugio de Animales'
+                            : 'Nombre Apellido',
+                        prefixIcon: Icons.person_outline,
+                        validator: (v) => v!.isEmpty ? 'Campo requerido' : null,
+                      ),
+                      const SizedBox(height: 16),
+                      CustomTextField(
+                        controller: _emailController,
+                        label: 'Correo electrónico',
+                        hint: 'hola@ejemplo.com',
+                        prefixIcon: Icons.email_outlined,
+                        validator: (v) =>
+                            !v!.contains('@') ? 'Email inválido' : null,
+                      ),
+                      const SizedBox(height: 16),
+                      CustomTextField(
+                        controller: _passwordController,
+                        label: 'Contraseña',
+                        hint: '••••••••',
+                        prefixIcon: Icons.lock_outline,
+                        isPassword: true,
+                        validator: (v) =>
+                            v!.length < 6 ? 'Mínimo 6 caracteres' : null,
+                      ),
+                      const SizedBox(height: 32),
 
-                        // Name field
-                        CustomTextField(
-                          controller: _nameController,
-                          label: 'Nombre completo',
-                          hint: 'Juan Pérez',
-                          prefixIcon: Icons.person_outline,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Por favor ingresa tu nombre';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Email field
-                        CustomTextField(
-                          controller: _emailController,
-                          label: 'Correo electrónico',
-                          hint: 'tu@email.com',
-                          prefixIcon: Icons.email_outlined,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Por favor ingresa tu correo';
-                            }
-                            if (!value.contains('@')) {
-                              return 'Por favor ingresa un correo válido';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Password field
-                        CustomTextField(
-                          controller: _passwordController,
-                          label: 'Contraseña',
-                          hint: '••••••••',
-                          prefixIcon: Icons.lock_outline,
-                          isPassword: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Por favor ingresa una contraseña';
-                            }
-                            if (value.length < 6) {
-                              return 'La contraseña debe tener al menos 6 caracteres';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Confirm password field
-                        CustomTextField(
-                          controller: _confirmPasswordController,
-                          label: 'Confirmar contraseña',
-                          hint: '••••••••',
-                          prefixIcon: Icons.lock_outline,
-                          isPassword: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Por favor confirma tu contraseña';
-                            }
-                            if (value != _passwordController.text) {
-                              return 'Las contraseñas no coinciden';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 32),
-
-                        // Register button
-                        SizedBox(
-                          height: 56,
-                          child: ElevatedButton(
-                            onPressed: isLoading ? null : _handleSignUp,
-                            child: const Text('Crear cuenta'),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Info text
-                        Text(
-                          'Recibirás un correo de verificación para activar tu cuenta',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+                      ElevatedButton(
+                        onPressed: state is AuthLoading ? null : _handleSignUp,
+                        child: Text(
+                            'Crear cuenta como ${_selectedRole == 'shelter' ? 'Refugio' : 'Adoptante'}'),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+// Widget auxiliar para las tarjetas de selección
+class _RoleCard extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final bool isSelected;
+  final VoidCallback onTap;
+  final Color color;
+
+  const _RoleCard({
+    required this.title,
+    required this.icon,
+    required this.isSelected,
+    required this.onTap,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: isSelected ? color.withOpacity(0.1) : Colors.white,
+          border: Border.all(
+            color: isSelected ? color : Colors.grey.shade300,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          children: [
+            Icon(icon, size: 40, color: isSelected ? color : Colors.grey),
+            const SizedBox(height: 8),
+            Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: isSelected ? color : Colors.grey,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
