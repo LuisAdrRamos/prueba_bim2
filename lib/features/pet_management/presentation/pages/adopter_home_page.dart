@@ -12,7 +12,6 @@ import '../../../auth/presentation/pages/profile_page.dart';
 import '../../../ai_assistant/presentation/pages/chat_page.dart';
 import '../../../ai_assistant/presentation/bloc/chat_bloc.dart';
 
-// --- IMPORTAMOS LA PÁGINA DE SOLICITUDES ---
 import '../../../adoption_management/presentation/pages/my_adoption_requests_page.dart';
 
 import '../bloc/pet_bloc.dart';
