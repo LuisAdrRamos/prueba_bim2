@@ -11,8 +11,17 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
 import 'package:get_it/get_it.dart' as _i174;
+import 'package:http/http.dart' as _i519;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:prueba_bim2/core/network/network_info.dart' as _i949;
+import 'package:prueba_bim2/features/ai_assistant/data/datasources/ai_remote_data_source.dart'
+    as _i703;
+import 'package:prueba_bim2/features/ai_assistant/data/repositories/ai_repository_impl.dart'
+    as _i95;
+import 'package:prueba_bim2/features/ai_assistant/domain/repositories/ai_repository.dart'
+    as _i115;
+import 'package:prueba_bim2/features/ai_assistant/presentation/bloc/chat_bloc.dart'
+    as _i909;
 import 'package:prueba_bim2/features/auth/data/datasources/auth_remote_data_source.dart'
     as _i714;
 import 'package:prueba_bim2/features/auth/data/repositories/auth_repository_impl.dart'
@@ -36,8 +45,9 @@ import 'package:prueba_bim2/features/pet_management/data/repositories/pet_reposi
     as _i1036;
 import 'package:prueba_bim2/features/pet_management/domain/repositories/pet_repository.dart'
     as _i1019;
+import 'package:prueba_bim2/features/pet_management/presentation/bloc/pet_bloc.dart'
+    as _i262;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
-import '../features/pet_management/presentation/bloc/pet_bloc.dart';
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -60,7 +70,9 @@ extension GetItInjectableX on _i174.GetIt {
           remoteDataSource: gh<_i236.PetRemoteDataSource>(),
           networkInfo: gh<_i949.NetworkInfo>(),
         ));
-    gh.factory<PetBloc>(() => PetBloc(gh<_i1019.PetRepository>()));
+    gh.factory<_i262.PetBloc>(() => _i262.PetBloc(gh<_i1019.PetRepository>()));
+    gh.lazySingleton<_i703.AIRemoteDataSource>(
+        () => _i703.AIRemoteDataSourceImpl(gh<_i519.Client>()));
     gh.lazySingleton<_i169.AuthRepository>(() => _i1008.AuthRepositoryImpl(
           remoteDataSource: gh<_i714.AuthRemoteDataSource>(),
           networkInfo: gh<_i949.NetworkInfo>(),
@@ -72,6 +84,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i74.SignIn>(() => _i74.SignIn(gh<_i169.AuthRepository>()));
     gh.factory<_i926.SignOut>(() => _i926.SignOut(gh<_i169.AuthRepository>()));
     gh.factory<_i695.SignUp>(() => _i695.SignUp(gh<_i169.AuthRepository>()));
+    gh.lazySingleton<_i115.AIRepository>(
+        () => _i95.AIRepositoryImpl(gh<_i703.AIRemoteDataSource>()));
     gh.factory<_i916.AuthBloc>(() => _i916.AuthBloc(
           signIn: gh<_i74.SignIn>(),
           signUp: gh<_i695.SignUp>(),
@@ -79,6 +93,7 @@ extension GetItInjectableX on _i174.GetIt {
           signOut: gh<_i926.SignOut>(),
           getCurrentUser: gh<_i587.GetCurrentUser>(),
         ));
+    gh.factory<_i909.ChatBloc>(() => _i909.ChatBloc(gh<_i115.AIRepository>()));
     return this;
   }
 }
