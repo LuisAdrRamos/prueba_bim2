@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'dart:io';
 
 abstract class AuthEvent extends Equatable {
   const AuthEvent();
@@ -52,4 +53,11 @@ class SignOutRequested extends AuthEvent {
 
 class AuthCheckRequested extends AuthEvent {
   const AuthCheckRequested();
+}
+
+class UpdateProfileRequested extends AuthEvent {
+  final String? displayName;
+  final File? photoFile;
+
+  const UpdateProfileRequested({this.displayName, this.photoFile});
 }

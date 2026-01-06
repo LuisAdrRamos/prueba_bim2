@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failures.dart';
 import '../entities/user_entity.dart';
+import 'dart:io';
 
 abstract class AuthRepository {
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
@@ -18,6 +19,9 @@ abstract class AuthRepository {
   Future<Either<Failure, void>> sendPasswordResetEmail({
     required String email,
   });
+
+  Future<Either<Failure, UserEntity>> updateProfile(
+      {String? displayName, File? photoFile});
 
   Future<Either<Failure, void>> signOut();
 

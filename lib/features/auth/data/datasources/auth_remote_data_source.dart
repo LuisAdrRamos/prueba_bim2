@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/user_model.dart';
@@ -14,6 +15,8 @@ abstract class AuthRemoteDataSource {
     String? displayName,
     String? role,
   });
+
+  Future<UserModel> updateProfile({String? displayName, File? photoFile});
 
   Future<void> sendPasswordResetEmail({
     required String email,
@@ -91,6 +94,54 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
+  Future<UserModel> updateProfile(
+      {String? displayName, File? photoFile}) async {
+    try {
+      final currentUser = supabaseClient.auth.currentUser;
+      if (currentUser == null) throw Exception('No hay usuario autenticado');
+
+      String? photoUrl;
+
+      // 1. Si hay foto nueva, la subimos
+      // Usamos el bucket 'pets' (o crea uno 'avatars' en Supabase y cambia el nombre aquí)
+      if (photoFile != null) {
+        final fileExt = photoFile.path.split('.').last;
+        // Nombre único para evitar caché: id_timestamp.jpg
+        final fileName =
+            'avatars/${currentUser.id}_${DateTime.now().millisecondsSinceEpoch}.$fileExt';
+
+        // 'upsert: true' permite sobrescribir si el nombre ya existe
+        await supabaseClient.storage.from('pets').upload(
+              fileName,
+              photoFile,
+              fileOptions: const FileOptions(upsert: true),
+            );
+
+        photoUrl = supabaseClient.storage.from('pets').getPublicUrl(fileName);
+      }
+
+      // 2. Actualizar datos en Auth (Metadata)
+      final updates = UserAttributes(
+        data: {
+          if (displayName != null) 'display_name': displayName,
+          // 'avatar_url' debe coincidir con lo que lee tu UserModel
+          if (photoUrl != null) 'avatar_url': photoUrl,
+        },
+      );
+
+      final response = await supabaseClient.auth.updateUser(updates);
+
+      if (response.user == null) throw Exception('Error al actualizar perfil');
+
+      return UserModel.fromSupabaseUser(response.user!);
+    } on AuthException catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception('Error inesperado al actualizar perfil: $e');
+    }
+  }
+
+  @override
   Future<void> sendPasswordResetEmail({
     required String email,
   }) async {
@@ -112,7 +163,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       await supabaseClient.auth.signOut();
     } on AuthException catch (e) {
-      throw Exception(e.message); // En signOut rara vez hay error crítico
+      throw Exception(e.message);
     } catch (e) {
       throw Exception('Error al cerrar sesión.');
     }
@@ -142,38 +193,26 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   String _mapSupabaseError(AuthException error) {
     final msg = error.message.toLowerCase();
 
-    // Credenciales incorrectas (Login)
     if (msg.contains('invalid login credentials')) {
       return 'Correo o contraseña incorrectos.';
     }
-
-    // Correo no confirmado (Login)
     if (msg.contains('email not confirmed')) {
       return 'Debes confirmar tu correo electrónico antes de entrar.';
     }
-
-    // Usuario no encontrado (A veces Supabase usa esto en lugar de invalid credentials)
     if (msg.contains('user not found')) {
       return 'No existe una cuenta con este correo.';
     }
-
-    // Contraseña muy débil (Registro)
     if (msg.contains('password should be')) {
       return 'La contraseña es muy débil (mínimo 6 caracteres).';
     }
-
-    // Correo ya registrado (Registro)
     if (msg.contains('already registered') ||
         msg.contains('user already exists')) {
       return 'Este correo ya está registrado.';
     }
-
-    // Demasiados intentos (Seguridad)
     if (msg.contains('rate limit') || msg.contains('too many requests')) {
       return 'Demasiados intentos. Espera unos minutos.';
     }
 
-    // Retorno por defecto si es otro error
     return error.message;
   }
 }

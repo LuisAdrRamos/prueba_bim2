@@ -5,6 +5,7 @@ import '../../../../core/network/network_info.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_remote_data_source.dart';
+import 'dart:io';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
@@ -97,6 +98,18 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, UserEntity?>> getCurrentUser() async {
     try {
       final user = await remoteDataSource.getCurrentUser();
+      return Right(user);
+    } catch (e) {
+      return Left(AuthFailure(e.toString().replaceAll('Exception: ', '')));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> updateProfile(
+      {String? displayName, File? photoFile}) async {
+    try {
+      final user = await remoteDataSource.updateProfile(
+          displayName: displayName, photoFile: photoFile);
       return Right(user);
     } catch (e) {
       return Left(AuthFailure(e.toString().replaceAll('Exception: ', '')));

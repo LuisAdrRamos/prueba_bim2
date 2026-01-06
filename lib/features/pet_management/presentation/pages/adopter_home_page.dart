@@ -13,6 +13,8 @@ import '../../../ai_assistant/presentation/pages/chat_page.dart';
 import '../../../ai_assistant/presentation/bloc/chat_bloc.dart';
 
 import '../../../adoption_management/presentation/pages/my_adoption_requests_page.dart';
+import '../../../adoption_management/presentation/bloc/adoption_bloc.dart';
+import '../../../adoption_management/presentation/bloc/adoption_event.dart';
 
 import '../bloc/pet_bloc.dart';
 import '../bloc/pet_event.dart';
@@ -48,6 +50,7 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
   }
 
   Future<void> _getUserLocation() async {
+    // ... (Tu lógica de GPS se mantiene igual) ...
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) return;
     LocationPermission permission = await Geolocator.checkPermission();
@@ -81,9 +84,18 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
     });
   }
 
+  // --- NUEVA LÓGICA DE NAVEGACIÓN ---
+  void _onTabTapped(BuildContext context, int index, String userId) {
+    setState(() => _currentIndex = index);
+
+    // Si vamos a la pestaña de Solicitudes (Índice 3), recargamos la lista
+    if (index == 3 && userId.isNotEmpty) {
+      context.read<AdoptionBloc>().add(LoadAdopterRequests(userId));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Obtenemos el usuario para sacar su ID y Nombre
     final authState = context.watch<AuthBloc>().state;
     String userName = 'Amante de los animales';
     String userId = '';
@@ -95,195 +107,178 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => getIt<PetBloc>()..add(const LoadPets()),
-        ),
-        // Proveedor de Chat persistente
-        BlocProvider(
-          create: (_) => getIt<ChatBloc>(),
-        ),
+        BlocProvider(create: (_) => getIt<PetBloc>()..add(const LoadPets())),
+        BlocProvider(create: (_) => getIt<ChatBloc>()),
+        // AGREGAMOS EL ADOPTION BLOC AQUÍ GLOBALMENTE
+        BlocProvider(create: (_) => getIt<AdoptionBloc>()),
       ],
-      child: Scaffold(
-        backgroundColor: const Color(0xFFFFF8F0),
-        body: SafeArea(
-          // USAMOS INDEXEDSTACK PARA 5 PANTALLAS
-          child: IndexedStack(
-            index: _currentIndex,
-            children: [
-              // 0. Inicio
-              _buildHomeBody(context, userName),
-
-              // 1. Mapa
-              const MapPage(),
-
-              // 2. Chat IA
-              const ChatPage(),
-
-              // 3. Solicitudes (AQUÍ ESTÁ EL CAMBIO)
-              // Pasamos el userId para cargar sus solicitudes
-              MyAdoptionRequestsPage(userId: userId),
-
-              // 4. Perfil
-              const ProfilePage(),
+      // Usamos Builder para tener el contexto de los Providers arriba
+      child: Builder(builder: (mainContext) {
+        return Scaffold(
+          backgroundColor: const Color(0xFFFFF8F0),
+          body: SafeArea(
+            child: IndexedStack(
+              index: _currentIndex,
+              children: [
+                _buildHomeBody(mainContext, userName),
+                const MapPage(),
+                const ChatPage(),
+                // Pestaña 3: Mis Solicitudes
+                MyAdoptionRequestsPage(userId: userId),
+                const ProfilePage(),
+              ],
+            ),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (index) => _onTabTapped(mainContext, index, userId),
+            selectedItemColor: const Color(0xFFFF8B3D),
+            unselectedItemColor: Colors.grey,
+            showUnselectedLabels: true,
+            type: BottomNavigationBarType.fixed,
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.map_outlined), label: 'Mapa'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.chat_bubble_outline), label: 'Chat IA'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite_border), label: 'Solicitudes'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person_outline), label: 'Perfil'),
             ],
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (index) => setState(() => _currentIndex = index),
-          selectedItemColor: const Color(0xFFFF8B3D),
-          unselectedItemColor: Colors.grey,
-          showUnselectedLabels: true,
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.map_outlined), label: 'Mapa'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.chat_bubble_outline), label: 'Chat IA'),
-            // NUEVO ITEM SEGÚN EL CONCEPTO (Corazón)
-            BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border), label: 'Solicitudes'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline), label: 'Perfil'),
-          ],
-        ),
-      ),
+        );
+      }),
     );
   }
 
-  // Cuerpo del Home (Sin cambios, solo copia y pega para mantenerlo)
+  // ... (El resto de _buildHomeBody y _FilterChip se queda IGUAL) ...
   Widget _buildHomeBody(BuildContext context, String userName) {
-    return Builder(builder: (homeContext) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Hola, $userName 👋',
-                        style:
-                            const TextStyle(color: Colors.grey, fontSize: 14)),
-                    const SizedBox(height: 4),
-                    const Text('Encuentra tu mascota',
-                        style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xFF2D3436))),
-                  ],
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: IconButton(
-                    icon: const Icon(Icons.logout, color: Colors.black54),
-                    onPressed: () =>
-                        context.read<AuthBloc>().add(const SignOutRequested()),
-                  ),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: TextField(
-              onChanged: (value) => _onSearchChanged(homeContext, value),
-              decoration: InputDecoration(
-                hintText: 'Buscar mascota...',
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 0),
+    // (Copia tu código anterior de _buildHomeBody aquí)
+    // Solo asegúrate de usar 'context' que llega por parámetro
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Hola, $userName 👋',
+                      style: const TextStyle(color: Colors.grey, fontSize: 14)),
+                  const SizedBox(height: 4),
+                  const Text('Encuentra tu mascota',
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF2D3436))),
+                ],
               ),
+              CircleAvatar(
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  icon: const Icon(Icons.logout, color: Colors.black54),
+                  onPressed: () =>
+                      context.read<AuthBloc>().add(const SignOutRequested()),
+                ),
+              )
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: TextField(
+            onChanged: (value) => _onSearchChanged(context, value),
+            decoration: InputDecoration(
+              hintText: 'Buscar mascota...',
+              prefixIcon: const Icon(Icons.search, color: Colors.grey),
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none),
+              contentPadding: const EdgeInsets.symmetric(vertical: 0),
             ),
           ),
-          const SizedBox(height: 20),
-          SizedBox(
-            height: 40,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              children: [
-                _FilterChip(
-                  label: 'Todos',
-                  isSelected: _currentFilter == 'Todos',
-                  onTap: () => _onFilterChanged(homeContext, 'Todos'),
-                ),
-                _FilterChip(
-                  label: 'Perro',
-                  isSelected: _currentFilter == 'Perro',
-                  onTap: () => _onFilterChanged(homeContext, 'Perro'),
-                ),
-                _FilterChip(
-                  label: 'Gato',
-                  isSelected: _currentFilter == 'Gato',
-                  onTap: () => _onFilterChanged(homeContext, 'Gato'),
-                ),
-              ],
-            ),
+        ),
+        const SizedBox(height: 20),
+        SizedBox(
+          height: 40,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            children: [
+              _FilterChip(
+                label: 'Todos',
+                isSelected: _currentFilter == 'Todos',
+                onTap: () => _onFilterChanged(context, 'Todos'),
+              ),
+              _FilterChip(
+                label: 'Perro',
+                isSelected: _currentFilter == 'Perro',
+                onTap: () => _onFilterChanged(context, 'Perro'),
+              ),
+              _FilterChip(
+                label: 'Gato',
+                isSelected: _currentFilter == 'Gato',
+                onTap: () => _onFilterChanged(context, 'Gato'),
+              ),
+            ],
           ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: BlocBuilder<PetBloc, PetState>(
-              builder: (context, state) {
-                if (state is PetLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is PetLoaded) {
-                  if (state.pets.isEmpty) {
-                    return Center(
-                        child: Text('No hay mascotas ($_currentFilter)'));
-                  }
-                  return RefreshIndicator(
-                    onRefresh: () async => context.read<PetBloc>().add(LoadPets(
-                        filter: _currentFilter, searchQuery: _searchQuery)),
-                    child: GridView.builder(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 10),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.75,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                      ),
-                      itemCount: state.pets.length,
-                      itemBuilder: (context, index) {
-                        final pet = state.pets[index];
-                        return PetCard(
-                          pet: pet,
-                          userLocation: _userPosition,
-                          onTap: () {
-                            Navigator.push(
+        ),
+        const SizedBox(height: 20),
+        Expanded(
+          child: BlocBuilder<PetBloc, PetState>(
+            builder: (context, state) {
+              if (state is PetLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is PetLoaded) {
+                if (state.pets.isEmpty) {
+                  return Center(
+                      child: Text('No hay mascotas ($_currentFilter)'));
+                }
+                return RefreshIndicator(
+                  onRefresh: () async => context.read<PetBloc>().add(LoadPets(
+                      filter: _currentFilter, searchQuery: _searchQuery)),
+                  child: GridView.builder(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 10),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.75,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                    ),
+                    itemCount: state.pets.length,
+                    itemBuilder: (context, index) {
+                      final pet = state.pets[index];
+                      return PetCard(
+                        pet: pet,
+                        userLocation: _userPosition,
+                        onTap: () {
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => PetDetailPage(
-                                  pet: pet,
-                                  userLocation: _userPosition,
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  );
-                }
-                return const SizedBox.shrink();
-              },
-            ),
+                                  builder: (_) => PetDetailPage(
+                                      pet: pet, userLocation: _userPosition)));
+                        },
+                      );
+                    },
+                  ),
+                );
+              }
+              return const SizedBox.shrink();
+            },
           ),
-        ],
-      );
-    });
+        ),
+      ],
+    );
   }
 }
 
@@ -291,10 +286,8 @@ class _FilterChip extends StatelessWidget {
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
-
   const _FilterChip(
       {required this.label, required this.isSelected, required this.onTap});
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -316,14 +309,10 @@ class _FilterChip extends StatelessWidget {
               : null,
         ),
         child: Center(
-          child: Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.grey[700],
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+            child: Text(label,
+                style: TextStyle(
+                    color: isSelected ? Colors.white : Colors.grey[700],
+                    fontWeight: FontWeight.bold))),
       ),
     );
   }
