@@ -11,7 +11,7 @@ import '../bloc/pet_bloc.dart';
 import '../bloc/pet_event.dart';
 import '../bloc/pet_state.dart';
 import 'create_pet_page.dart';
-import '../../../adoption_management/presentation/pages/incoming_requests_page.dart'; // Importar
+import '../../../adoption_management/presentation/pages/incoming_requests_page.dart';
 
 class ShelterHomePage extends StatefulWidget {
   final String userId;
