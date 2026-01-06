@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prueba_bim2/features/pet_management/presentation/pages/map_page.dart';
 import '../../../../injection_container.dart';
 import '../../../auth/presentation/bloc/auth_bloc.dart';
 import '../../../auth/presentation/bloc/auth_event.dart';
@@ -11,6 +12,8 @@ import '../bloc/pet_event.dart';
 import '../bloc/pet_state.dart';
 import '../widgets/pet_card.dart';
 import 'pet_detail_page.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
 
 class AdopterHomePage extends StatefulWidget {
   const AdopterHomePage({super.key});
@@ -24,11 +27,39 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
   String _currentFilter = 'Todos';
   String _searchQuery = '';
   Timer? _debounce;
+  LatLng? _userPosition;
 
   @override
   void dispose() {
     _debounce?.cancel();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserLocation(); // <--- Llamamos al iniciar
+  }
+
+  // Función para obtener ubicación silenciosamente (sin bloquear la UI)
+  Future<void> _getUserLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) return;
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) return;
+    }
+
+    if (permission == LocationPermission.deniedForever) return;
+
+    final position = await Geolocator.getCurrentPosition();
+    if (mounted) {
+      setState(() {
+        _userPosition = LatLng(position.latitude, position.longitude);
+      });
+    }
   }
 
   void _onFilterChanged(BuildContext context, String filter) {
@@ -65,7 +96,7 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
           child: _currentIndex == 0
               ? _buildHomeBody(context, userName)
               : _currentIndex == 1
-                  ? const Center(child: Text("Mapa (Fase 3)"))
+                  ? const MapPage()
                   : _currentIndex == 2
                       ? const Center(child: Text("Chat IA (Fase 4)"))
                       : const ProfilePage(), // Perfil integrado en la barra
@@ -209,11 +240,17 @@ class _AdopterHomePageState extends State<AdopterHomePage> {
                         final pet = state.pets[index];
                         return PetCard(
                           pet: pet,
+                          userLocation: _userPosition,
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => PetDetailPage(pet: pet)));
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => PetDetailPage(
+                                  pet: pet,
+                                  userLocation: _userPosition,
+                                ),
+                              ),
+                            );
                           },
                         );
                       },

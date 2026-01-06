@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
+import 'package:latlong2/latlong.dart';
 import '../../../../injection_container.dart';
 import '../../../auth/presentation/bloc/auth_bloc.dart';
 import '../../../auth/presentation/bloc/auth_state.dart';
@@ -12,6 +13,7 @@ import '../bloc/pet_event.dart';
 import '../bloc/pet_state.dart';
 import '../../../auth/presentation/widgets/custom_text_field.dart';
 import '../../../auth/presentation/widgets/loading_overlay.dart';
+import 'location_picker_page.dart';
 
 class CreatePetPage extends StatefulWidget {
   final PetEntity?
@@ -37,6 +39,8 @@ class _CreatePetPageState extends State<CreatePetPage> {
   File? _imageFile; // Foto nueva seleccionada
   final _picker = ImagePicker();
 
+  LatLng _petLocation = const LatLng(0, 0); // Ubicación por defecto
+
   @override
   void initState() {
     super.initState();
@@ -51,9 +55,14 @@ class _CreatePetPageState extends State<CreatePetPage> {
     _selectedSpecies = pet?.species ?? 'Perro';
     _selectedGender = pet?.gender ?? 'Macho';
     _selectedSize = pet?.size ?? 'Mediano';
+
+    // Cargar ubicación existente si hay
+    if (pet != null) {
+      _petLocation = LatLng(pet.locationLat, pet.locationLng);
+    }
   }
 
-  // ... (Función _showImageSourceActionSheet y _pickImage IGUALES QUE ANTES) ...
+  // Selección de Imagen (Cámara o Galería)
   void _showImageSourceActionSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -94,7 +103,23 @@ class _CreatePetPageState extends State<CreatePetPage> {
         });
       }
     } catch (e) {
-      // Manejar error
+      // Manejar error silenciosamente o mostrar snackbar
+    }
+  }
+
+  // Selección de Ubicación (Abre el Mapa)
+  Future<void> _pickLocation() async {
+    final LatLng? result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => LocationPickerPage(initialLocation: _petLocation),
+      ),
+    );
+
+    if (result != null) {
+      setState(() {
+        _petLocation = result;
+      });
     }
   }
 
@@ -112,10 +137,10 @@ class _CreatePetPageState extends State<CreatePetPage> {
 
       final authState = context.read<AuthBloc>().state;
       if (authState is AuthAuthenticated) {
-        // MODO EDICIÓN
+        // --- MODO EDICIÓN ---
         if (widget.petToEdit != null) {
           final updatedPet = PetEntity(
-            id: widget.petToEdit!.id, // Mismo ID
+            id: widget.petToEdit!.id,
             name: _nameController.text,
             species: _selectedSpecies,
             breed: _breedController.text,
@@ -123,10 +148,10 @@ class _CreatePetPageState extends State<CreatePetPage> {
             size: _selectedSize,
             gender: _selectedGender,
             description: _descriptionController.text,
-            imageUrl: widget.petToEdit!
-                .imageUrl, // Se mantiene URL vieja hasta que el server la cambie
-            locationLat: widget.petToEdit!.locationLat,
-            locationLng: widget.petToEdit!.locationLng,
+            imageUrl: widget.petToEdit!.imageUrl,
+            // USAMOS LAS COORDENADAS SELECCIONADAS
+            locationLat: _petLocation.latitude,
+            locationLng: _petLocation.longitude,
             shelterId: widget.petToEdit!.shelterId,
             isAdopted: widget.petToEdit!.isAdopted,
           );
@@ -135,7 +160,7 @@ class _CreatePetPageState extends State<CreatePetPage> {
               .read<PetBloc>()
               .add(UpdatePet(pet: updatedPet, newImage: _imageFile));
         }
-        // MODO CREACIÓN
+        // --- MODO CREACIÓN ---
         else {
           final newPet = PetEntity(
             id: const Uuid().v4(),
@@ -146,12 +171,14 @@ class _CreatePetPageState extends State<CreatePetPage> {
             size: _selectedSize,
             gender: _selectedGender,
             description: _descriptionController.text,
-            imageUrl: '',
-            locationLat: 0.0,
-            locationLng: 0.0,
+            imageUrl: '', // Se llena en el backend
+            // USAMOS LAS COORDENADAS SELECCIONADAS
+            locationLat: _petLocation.latitude,
+            locationLng: _petLocation.longitude,
             shelterId: authState.user.id,
             isAdopted: false,
           );
+
           context
               .read<PetBloc>()
               .add(CreatePet(pet: newPet, imageFile: _imageFile!));
@@ -173,7 +200,7 @@ class _CreatePetPageState extends State<CreatePetPage> {
               SnackBar(
                   content: Text(state.message), backgroundColor: Colors.green),
             );
-            Navigator.pop(context); // Volver
+            Navigator.pop(context);
           } else if (state is PetError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -194,7 +221,7 @@ class _CreatePetPageState extends State<CreatePetPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // ÁREA DE FOTO
+                      // --- 1. ÁREA DE FOTO ---
                       GestureDetector(
                         onTap: () => _showImageSourceActionSheet(context),
                         child: Container(
@@ -203,7 +230,6 @@ class _CreatePetPageState extends State<CreatePetPage> {
                             color: Colors.grey[200],
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(color: Colors.grey.shade300),
-                            // Lógica de visualización de imagen
                             image: _imageFile != null
                                 ? DecorationImage(
                                     image: FileImage(_imageFile!),
@@ -237,13 +263,14 @@ class _CreatePetPageState extends State<CreatePetPage> {
                         ),
                       const SizedBox(height: 20),
 
-                      // CAMPOS (Mismos que antes)
+                      // --- 2. CAMPOS DE TEXTO ---
                       CustomTextField(
                           controller: _nameController,
                           label: 'Nombre',
                           hint: 'Ej: Firulais',
                           prefixIcon: Icons.pets),
                       const SizedBox(height: 10),
+
                       DropdownButtonFormField<String>(
                         value: _selectedSpecies,
                         decoration: const InputDecoration(
@@ -255,18 +282,21 @@ class _CreatePetPageState extends State<CreatePetPage> {
                         onChanged: (v) => setState(() => _selectedSpecies = v!),
                       ),
                       const SizedBox(height: 10),
+
                       CustomTextField(
                           controller: _breedController,
                           label: 'Raza',
                           hint: 'Ej: Labrador',
                           prefixIcon: Icons.category),
                       const SizedBox(height: 10),
+
                       CustomTextField(
                           controller: _ageController,
                           label: 'Edad',
                           hint: 'Ej: 2 años',
                           prefixIcon: Icons.cake),
                       const SizedBox(height: 10),
+
                       Row(
                         children: [
                           Expanded(
@@ -301,13 +331,55 @@ class _CreatePetPageState extends State<CreatePetPage> {
                         ],
                       ),
                       const SizedBox(height: 10),
+
                       CustomTextField(
                           controller: _descriptionController,
                           label: 'Descripción',
                           hint: 'Historia...',
                           prefixIcon: Icons.description),
+                      const SizedBox(height: 20),
+
+                      // --- 3. CAMPO DE UBICACIÓN (NUEVO) ---
+                      const Text('Ubicación del Refugio',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
+                      const SizedBox(height: 8),
+                      InkWell(
+                        onTap: _pickLocation, // Abre el mapa
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 16),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.location_on,
+                                  color: Colors.orange),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  (_petLocation.latitude == 0 &&
+                                          _petLocation.longitude == 0)
+                                      ? 'Toca para seleccionar en el mapa'
+                                      : 'Lat: ${_petLocation.latitude.toStringAsFixed(4)}, Lng: ${_petLocation.longitude.toStringAsFixed(4)}',
+                                  style: TextStyle(
+                                    color: (_petLocation.latitude == 0)
+                                        ? Colors.grey
+                                        : Colors.black,
+                                  ),
+                                ),
+                              ),
+                              const Icon(Icons.arrow_forward_ios,
+                                  size: 16, color: Colors.grey),
+                            ],
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 30),
 
+                      // --- 4. BOTÓN PUBLICAR ---
                       ElevatedButton(
                         onPressed: state is PetLoading
                             ? null

@@ -63,6 +63,7 @@ dependencies:
   latlong2: ^0.9.1
   geolocator: ^13.0.0
   geocoding: ^3.0.0 # Para direcciones
+  permission_handler: ^11.1.0 # Para pedir permiso de ubicación de forma limpia
 
   # --- INTELIGENCIA ARTIFICIAL (GEMINI) ---
   google_generative_ai: ^0.4.4
