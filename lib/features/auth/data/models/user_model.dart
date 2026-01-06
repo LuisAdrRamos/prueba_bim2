@@ -8,15 +8,20 @@ class UserModel extends UserEntity {
     super.displayName,
     super.photoUrl,
     super.createdAt,
+    super.role,
   });
 
   factory UserModel.fromSupabaseUser(User user) {
+
+    final metadata = user.userMetadata;
+
     return UserModel(
       id: user.id,
       email: user.email ?? '',
       displayName: user.userMetadata?['display_name'] as String?,
       photoUrl: user.userMetadata?['avatar_url'] as String?,
       createdAt: DateTime.parse(user.createdAt),
+      role: metadata?['role'] as String? ?? 'adopter',
     );
   }
 
@@ -27,6 +32,7 @@ class UserModel extends UserEntity {
       displayName: displayName,
       photoUrl: photoUrl,
       createdAt: createdAt,
+      role: role,
     );
   }
 }
